@@ -117,3 +117,13 @@ footer {
   text-align: center;
   padding: 20px;
 }
+/* Effet tilt 3D léger sur les cartes produits */
+.produit-card {
+  transform-style: preserve-3d;
+  transition: transform .2s ease, box-shadow .2s ease;
+  will-change: transform;
+}
+.produit-card.tilted {
+  box-shadow: 0 20px 40px rgba(0,0,0,.15);
+}
+.produit-card img { backface-visibility: hidden; }
