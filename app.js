@@ -1,4 +1,3 @@
-
 /* ====== Données & stockage ====== */
 const DEFAULT_DATA = {
   products: [
