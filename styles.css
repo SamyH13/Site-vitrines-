@@ -81,4 +81,9 @@ footer { padding: 1.5rem 0 3rem; color: #666; }
 footer .grid { align-items: start; }
 .social a { margin-right: .5rem; }
 
-.logo-img{width:40px;height:40px;border-radius:.6rem;object-fit:cover;background:#fff}
+.logo-img {
+    width: 120px;      /* augmente la taille */
+    height: auto;      /* garde les proportions */
+    display: block;
+    margin: 0 auto;    /* centre le logo */
+}
