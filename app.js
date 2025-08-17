@@ -248,3 +248,91 @@ window.addEventListener('DOMContentLoaded', () => {
   // Gestion import
   byId('importFile').addEventListener('change', importData);
 });
+{
+  id: "p1",
+  name: "Collection Parfums Dubaï (50 ml)",
+  category: "Parfums",
+  price: 29.90,
+  stock: 12,
+  image: "https://images.unsplash.com/photo-1541643600914-78b084683601",
+  desc: "Parfums orientaux inspirés de Dubaï : notes oud, musc, rose. Flacon 50 ml.",
+  rating: 4.7,
+  reviews: []
+},
+{
+  id: "p2",
+  name: "Bakhoor – Encens oriental",
+  category: "Encens",
+  price: 9.90,
+  stock: 20,
+  image: "https://images.pexels.com/photos/7234182/pexels-photo-7234182.jpeg",
+  desc: "Fragments de bakhoor à brûler dans une mabkhara. Parfume la maison.",
+  rating: 4.6,
+  reviews: []
+},
+{
+  id: "p3",
+  name: "Henné Naturel (100 g)",
+  category: "Beauté",
+  price: 6.90,
+  stock: 18,
+  image: "https://upload.wikimedia.org/wikipedia/commons/6/67/Henna_Powder_and_Leaves.jpg",
+  desc: "Henné pur pour coloration végétale et soins capillaires.",
+  rating: 4.5,
+  reviews: []
+},
+{
+  id: "p4",
+  name: "Huile Capillaire Amla (100 ml)",
+  category: "Huiles",
+  price: 8.90,
+  stock: 16,
+  image: "https://images.unsplash.com/photo-1541643600914-78b084683601",
+  desc: "Huile nourrissante amla pour fortifier et faire briller les cheveux.",
+  rating: 4.4,
+  reviews: []
+},
+{
+  id: "p5",
+  name: "Eau de Rose (250 ml)",
+  category: "Beauté",
+  price: 7.90,
+  stock: 14,
+  image: "https://images.unsplash.com/photo-1615634260167-8343e5f1a15f",
+  desc: "Eau florale apaisante pour le visage et les cheveux.",
+  rating: 4.6,
+  reviews: []
+},
+{
+  id: "p6",
+  name: "Huile d’Argan Cosmétique (100 ml)",
+  category: "Huiles",
+  price: 12.90,
+  stock: 15,
+  image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9",
+  desc: "Huile d’argan pressée à froid pour peau et cheveux.",
+  rating: 4.7,
+  reviews: []
+},
+{
+  id: "p7",
+  name: "Musc Tahara (roll-on 6 ml)",
+  category: "Parfums",
+  price: 5.90,
+  stock: 25,
+  image: "https://images.unsplash.com/photo-1605978547351-8b5d7d5a2f4b",
+  desc: "Musc blanc propre et doux, format roll-on pratique.",
+  rating: 4.5,
+  reviews: []
+},
+{
+  id: "p8",
+  name: "Bakhoor – Charbons auto-allumants (10 pcs)",
+  category: "Encens",
+  price: 3.90,
+  stock: 30,
+  image: "https://images.pexels.com/photos/7234182/pexels-photo-7234182.jpeg",
+  desc: "Charbons rapides pour brûleurs d’encens. Idéal avec bakhoor.",
+  rating: 4.3,
+  reviews: []
+}
