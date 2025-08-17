@@ -1,0 +1,157 @@
+
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marché Provence — Parfums Dubaï, Encens & Beauté</title>
+  <meta name="description" content="Site vitrine du stand : parfums de Dubaï, encens, beauté, henné, huiles. Avis clients, votes pour nouveaux produits, stock visible, et calendrier des marchés.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img class="logo-img" src="assets/logo.jpg" alt="Marché Provence logo">
+        <div>Marché Provence</div>
+      </div>
+      <nav>
+        <a href="#produits">Produits</a>
+        <a href="#avis">Avis</a>
+        <a href="#votes">Idées & votes</a>
+        <a href="#marches">Dates des marchés</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container wrap">
+      <div>
+        <h1>Marché Provence — Parfums Dubaï, Encens & Soins</h1>
+        <p>Découvrez nos parfums inspirés de Dubaï, encens bakhoor, produits de beauté, henné, et huiles naturelles. Lisez les avis, votez pour les nouveautés, suivez les dates de nos marchés.</p>
+        <div class="cta">
+          <a class="btn" href="#produits">Voir les produits</a>
+          <a class="btn secondary" href="#marches">Prochain marché</a>
+        </div>
+      </div>
+      <img src="data:image/svg+xml;utf8,${encodeURIComponent('<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'1200\' height=\'800\'><defs><linearGradient id=\'g\' x1=\'0\' y1=\'0\' x2=\'1\' y2=\'1\'><stop stop-color=\'#111\'/><stop offset=\'1\' stop-color=\'#666\'/></linearGradient></defs><rect width=\'100%\' height=\'100%\' fill=\'url(#g)\'/><g fill=\'#fff\' opacity=\'.8\'><circle cx=\'260\' cy=\'230\' r=\'140\'/><rect x=\'520\' y=\'180\' width=\'480\' height=\'320\' rx=\'26\'/></g><text x=\'50%\' y=\'90%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'#fff\' font-family=\'sans-serif\' font-size=\'42\'>Votre stand, votre style</text></svg>')}" alt="Stand de marché">
+    </div>
+  </section>
+
+  <section id="produits">
+    <div class="container">
+      <div class="section-title">
+        <h2>Produits</h2>
+        <div class="filters">
+          <select id="filterCat" title="Filtrer par catégorie"></select>
+          <input id="searchInput" type="search" placeholder="Rechercher un produit…">
+          <button class="btn" onclick="exportData()">Exporter les données</button>
+          <label class="btn secondary" for="importFile" style="cursor:pointer;">Importer</label>
+          <input id="importFile" type="file" accept="application/json" class="hidden">
+        </div>
+      </div>
+      <div id="productsWrap" class="grid cols-3"></div>
+    </div>
+  </section>
+
+  <section id="avis">
+    <div class="container">
+      <div class="section-title">
+        <h2>Avis clients</h2>
+        <p class="small">Laissez votre avis sur un produit via le bouton “Laisser un avis”.</p>
+      </div>
+      <p class="small">Les avis récents s’affichent sur chaque fiche produit.</p>
+    </div>
+  </section>
+
+  <section id="votes">
+    <div class="container">
+      <div class="section-title">
+        <h2>Idées de nouveaux produits & votes</h2>
+        <button class="btn" onclick="addProposal()">Proposer une idée</button>
+      </div>
+      <div id="proposalsWrap" class="grid cols-2"></div>
+    </div>
+  </section>
+
+  <section id="marches">
+    <div class="container">
+      <div class="section-title">
+        <h2>Dates des marchés</h2>
+        <button class="btn secondary" onclick="addMarket()">Ajouter une date</button>
+      </div>
+      <div class="card">
+        <div class="content">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Ville</th>
+                <th>Lieu</th>
+                <th>Horaires</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="marketsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-title"><h2>Contact</h2></div>
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="content">
+            <h3>Marché Provence</h3>
+            <p>SIREN (optionnel) — Téléphone — WhatsApp — Instagram</p>
+            <p>Email : <a href="mailto:contact@exemple.com">contact@exemple.com</a></p>
+            <p>Message rapide :</p>
+            <form onsubmit="event.preventDefault(); alert('Merci ! Nous vous répondrons bientôt.'); this.reset();">
+              <div class="grid">
+                <div>
+                  <label>Votre nom</label>
+                  <input required>
+                </div>
+                <div>
+                  <label>Votre email</label>
+                  <input type="email" required>
+                </div>
+                <div>
+                  <label>Votre message</label>
+                  <textarea required rows="4"></textarea>
+                </div>
+                <div><button class="btn">Envoyer</button></div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <h3>À propos</h3>
+            <p>Artisan passionné par les senteurs orientales et les soins naturels. Retrouvez-nous chaque semaine sur les marchés de la région pour découvrir nos nouveautés et profiter de conseils personnalisés.</p>
+            <p class="small">Ce site vitrine fonctionne sans serveur : données sauvegardées dans votre navigateur (localStorage). Utilisez “Exporter/Importer” pour sauvegarder ou transférer sur un autre appareil.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container grid cols-2">
+      <div>© <span id="year"></span> Marché Provence — Tous droits réservés.</div>
+      <div class="social" style="text-align:right;">
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <a href="#" aria-label="WhatsApp">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
