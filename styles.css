@@ -176,3 +176,9 @@ footer .grid { align-items: start; }
 .p-body{ padding:14px; text-align:left; }
 .p-body h3{ margin:.2rem 0 .4rem; font-size:1.05rem; }
 .p-desc{ color:#555; font-size:.95rem; margin:0; }
+.logo {
+  width: 120px;   /* taille du logo */
+  height: auto;
+  display: block;
+  margin: 0 auto; /* centre ton logo */
+}
