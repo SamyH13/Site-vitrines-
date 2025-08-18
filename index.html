@@ -4,27 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Marché Provence — Parfums Dubaï, Encens & Beauté</title>
-  <meta name="description" content="Parfums orientaux de Dubaï, encens, henné, huiles naturelles et produits de beauté. Retrouvez-nous sur les marchés de Provence.">
+  <meta name="description" content="Parfums de Dubaï, encens, henné, huiles naturelles et produits de beauté. Retrouvez-nous sur les marchés de Provence.">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Mini styles admin pour visibilité même si styles.css n'est pas à jour */
-    .admin-tools{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-    .admin-btn{padding:6px 10px;border-radius:8px;border:1px solid #bbb;cursor:pointer;background:#fff}
-    .admin-btn.danger{border-color:#d33;color:#d33}
-    .admin-chip{display:inline-block;font-size:12px;background:#00000099;color:#fff;border-radius:8px;padding:4px 8px;margin:6px;position:absolute;right:6px;top:6px}
-    .admin-on .admin-only{display:table-cell !important}
-    .admin-off .admin-only{display:none !important}
-    .prod-card{position:relative}
-  </style>
 </head>
 <body class="admin-off">
 
   <!-- HEADER -->
   <header>
     <nav class="navbar">
-      <div class="logo" id="logoSecret" title="Double-clique pour Admin">
+      <a class="logo" id="logoSecret" title="Appui long = admin">
         <img src="assets/logo.png" alt="Logo Marché Provence">
-      </div>
+      </a>
       <ul class="nav-links">
         <li><a href="#photos">Photos</a></li>
         <li><a href="#produits">Produits</a></li>
@@ -64,12 +54,10 @@
   </section>
 
   <!-- AVIS (placeholder) -->
-  <section id="avis">
-    <div class="container">
-      <div class="section-title">
-        <h2>Avis clients</h2>
-        <p class="small">Bientôt : avis par produit.</p>
-      </div>
+  <section id="avis" class="container">
+    <div class="section-title">
+      <h2>Avis clients</h2>
+      <p class="small">Bientôt : avis par produit.</p>
     </div>
   </section>
 
@@ -119,202 +107,15 @@
     </div>
   </footer>
 
-  <!-- ===== ADMIN PANEL (affiché après code) ===== -->
-  <div id="adminPanel" style="display:none;position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+  <!-- Bouton Admin flottant -->
+  <button id="adminBtn" class="admin-fab" aria-label="Admin">⚙️</button>
+
+  <!-- Panneau indicateur Admin -->
+  <div id="adminPanel" style="display:none;position:fixed;bottom:84px;right:16px;
        background:#1f1f1f;color:#fff;padding:8px 10px;border-radius:12px;z-index:10000;box-shadow:0 8px 24px rgba(0,0,0,.25);">
-    <button class="admin-btn" onclick="toggleAdmin(false)">Quitter Admin</button>
+    <b>Mode admin</b> — <button class="admin-btn" onclick="toggleAdmin(false)">Quitter</button>
   </div>
 
-  <script>
-    /* ===== Données par défaut ===== */
-    const DEFAULT_DATA = {
-      products: [
-        {id:"p1", name:"Collection Dubaï", desc:"Parfums orientaux premium.", price:25, stock:10, image:"assets/parfum.jpg"},
-        {id:"p2", name:"Encens Bakhoor", desc:"Encens traditionnels.",     price:10, stock:15, image:"assets/encens.jpg"},
-        {id:"p3", name:"Huiles naturelles", desc:"Beauté et massage.",      price:12, stock:12, image:"assets/huile.jpg"}
-      ],
-      markets: [
-        {id:"m1", date:"2025-09-01", city:"Arles",    place:"Place République", hours:"9h–13h"},
-        {id:"m2", date:"2025-09-05", city:"Tarascon", place:"Centre-ville",     hours:"9h–13h"}
-      ],
-      contact: { email:"contact@exemple.com", phone:"06 00 00 00 00", insta:"@marcheprovence" }
-    };
-
-    const LS_KEY = "site_data_v2";
-    let DATA = JSON.parse(localStorage.getItem(LS_KEY) || JSON.stringify(DEFAULT_DATA));
-    function save(){ localStorage.setItem(LS_KEY, JSON.stringify(DATA)); }
-
-    /* ===== PRODUITS ===== */
-    function renderProducts(){
-      const grid = document.getElementById("productsGrid");
-      grid.innerHTML = "";
-      DATA.products.forEach((p,idx)=>{
-        const card = document.createElement("article");
-        card.className = "produit-card prod-card";
-        card.innerHTML = `
-          <img src="${p.image}" alt="${p.name}">
-          <div class="p-body">
-            <h3>${p.name}</h3>
-            <p class="p-desc">${p.desc||""}</p>
-            <p><span class="p-price">${p.price ?? ""}${p.price!=="" ? "€" : ""}</span> ${p.stock!=="" ? `| Stock: <span class="p-stock">${p.stock}</span>` : ""}</p>
-            <div class="admin-tools" style="display:${ADMIN?'flex':'none'}">
-              <button class="admin-btn" onclick="editProduct(${idx})">✏️ Modifier</button>
-              <button class="admin-btn" onclick="changeImage(${idx})">📷 Image</button>
-              <button class="admin-btn danger" onclick="deleteProduct(${idx})">🗑️ Supprimer</button>
-            </div>
-          </div>`;
-        if (ADMIN) {
-          const chip = document.createElement('div');
-          chip.className = 'admin-chip';
-          chip.textContent = `ID: ${p.id}`;
-          card.appendChild(chip);
-        }
-        grid.appendChild(card);
-      });
-      document.getElementById('productsAdminBar').style.display = ADMIN ? 'flex' : 'none';
-    }
-
-    function addProduct(){
-      const name = prompt("Nom du produit ?"); if(!name) return;
-      const desc = prompt("Description ?") || "";
-      const price = prompt("Prix ? (laisser vide si tu veux)") ?? "";
-      const stock = prompt("Stock ? (laisser vide si tu veux)") ?? "";
-      const image = prompt("URL image ? (ou mets plus tard)") || "assets/parfum.jpg";
-      DATA.products.push({
-        id: "p"+Date.now(), name, desc, price: price===""? "" : Number(price.replace(',','.')),
-        stock: stock===""? "" : Number(stock), image
-      });
-      save(); renderProducts();
-    }
-    function editProduct(i){
-      const p = DATA.products[i]; if(!p) return;
-      const name = prompt("Nom :", p.name) ?? p.name;
-      const desc = prompt("Description :", p.desc) ?? p.desc;
-      const price = prompt("Prix (€) :", p.price) ?? p.price;
-      const stock = prompt("Stock :", p.stock) ?? p.stock;
-      p.name = name; p.desc = desc;
-      p.price = (price===""? "" : Number(String(price).replace(',','.')));
-      p.stock = (stock===""? "" : Number(stock));
-      save(); renderProducts();
-    }
-    function deleteProduct(i){
-      if(!confirm("Supprimer ce produit ?")) return;
-      DATA.products.splice(i,1); save(); renderProducts();
-    }
-    function changeImage(i){
-      const p = DATA.products[i]; if(!p) return;
-      const url = prompt("URL de l'image ?", p.image || "");
-      if (url){ p.image = url; save(); renderProducts(); }
-    }
-
-    /* ===== MARCHÉS ===== */
-    function renderMarkets(){
-      const body = document.getElementById("marketsBody");
-      body.innerHTML = "";
-      const list = [...DATA.markets].sort((a,b)=>a.date.localeCompare(b.date));
-      list.forEach((m,idx)=>{
-        const realIndex = DATA.markets.findIndex(x=>x.id===m.id);
-        body.insertAdjacentHTML('beforeend', `
-          <tr>
-            <td>${new Date(m.date).toLocaleDateString('fr-FR',{weekday:'short',day:'2-digit',month:'short',year:'numeric'})}</td>
-            <td>${m.city}</td>
-            <td>${m.place}</td>
-            <td>${m.hours}</td>
-            <td class="admin-only" style="display:${ADMIN?'table-cell':'none'}">
-              <button class="admin-btn" onclick="editMarket('${m.id}')">✏️</button>
-              <button class="admin-btn danger" onclick="deleteMarket('${m.id}')">🗑️</button>
-            </td>
-          </tr>
-        `);
-      });
-      document.getElementById('marketsAdminBar').style.display = ADMIN ? 'flex' : 'none';
-      document.body.classList.toggle('admin-on', ADMIN);
-      document.body.classList.toggle('admin-off', !ADMIN);
-    }
-    function addMarket(){
-      const date = prompt("Date (AAAA-MM-JJ) ?"); if(!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return alert("Date invalide.");
-      const city = prompt("Ville ?") || "";
-      const place= prompt("Lieu ?") || "";
-      const hours= prompt("Horaires ? (ex : 9h–13h)") || "";
-      DATA.markets.push({id:"m"+Date.now(), date, city, place, hours});
-      save(); renderMarkets();
-    }
-    function editMarket(id){
-      const i = DATA.markets.findIndex(x=>x.id===id); if(i<0) return;
-      const m = DATA.markets[i];
-      const date = prompt("Date (AAAA-MM-JJ) :", m.date) || m.date;
-      if(!/^\d{4}-\d{2}-\d{2}$/.test(date)) return alert("Date invalide.");
-      const city = prompt("Ville :", m.city) || m.city;
-      const place= prompt("Lieu :", m.place) || m.place;
-      const hours= prompt("Horaires :", m.hours) || m.hours;
-      DATA.markets[i] = {id:m.id, date, city, place, hours};
-      save(); renderMarkets();
-    }
-    function deleteMarket(id){
-      const i = DATA.markets.findIndex(x=>x.id===id); if(i<0) return;
-      if(!confirm("Supprimer cette date ?")) return;
-      DATA.markets.splice(i,1); save(); renderMarkets();
-    }
-
-    /* ===== CONTACT ===== */
-    function renderContact(){
-      const c = DATA.contact || {};
-      const email = c.email || "contact@exemple.com";
-      document.getElementById("contactEmail").textContent = email;
-      document.getElementById("contactEmail").href = "mailto:"+email;
-      document.getElementById("contactPhone").textContent = c.phone || "06 00 00 00 00";
-      document.getElementById("contactInsta").textContent = c.insta || "@marcheprovence";
-      document.getElementById('contactAdminBar').style.display = ADMIN ? 'flex' : 'none';
-    }
-    function editContact(){
-      const c = DATA.contact || {};
-      c.email = prompt("Email :", c.email || "contact@exemple.com") || c.email;
-      c.phone = prompt("Téléphone :", c.phone || "06 00 00 00 00") || c.phone;
-      c.insta = prompt("Instagram :", c.insta || "@marcheprovence") || c.insta;
-      DATA.contact = c; save(); renderContact();
-    }
-
-    /* ===== IMPORT / EXPORT ===== */
-    function exportData(){
-      const blob = new Blob([JSON.stringify(DATA,null,2)], {type:"application/json"});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a"); a.href=url; a.download="site-data.json"; a.click();
-      URL.revokeObjectURL(url);
-    }
-    document.getElementById("importFile").addEventListener('change', e=>{
-      const f = e.target.files[0]; if(!f) return;
-      const r = new FileReader();
-      r.onload = ev=>{
-        try{ DATA = JSON.parse(ev.target.result); save(); init(); alert("Import OK"); }
-        catch(e){ alert("Fichier invalide"); }
-      };
-      r.readAsText(f);
-    });
-
-    /* ===== ADMIN (double-clic logo) ===== */
-    let ADMIN = false;
-    function toggleAdmin(on=true){
-      ADMIN = !!on;
-      document.getElementById('adminPanel').style.display = ADMIN ? 'block':'none';
-      renderProducts(); renderMarkets(); renderContact();
-    }
-    document.getElementById("logoSecret").ondblclick = ()=>{
-      const code = prompt("Code admin ?");
-      if (code === "Fourgons13150") {
-        toggleAdmin(true);
-      } else {
-        alert("Mauvais code");
-      }
-    };
-
-    /* ===== INIT ===== */
-    function init(){
-      document.getElementById("year").textContent = new Date().getFullYear();
-      renderProducts();
-      renderMarkets();
-      renderContact();
-    }
-    init();
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
