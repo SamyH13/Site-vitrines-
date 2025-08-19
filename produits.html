@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Produits — Marché Provence</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar container">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a class="active" href="produits.html">Produits</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-text">
+        <h1>Nos produits</h1>
+        <p>Catalogue vitrine — disponibles sur notre stand.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container produits">
+    <div id="grid" class="produits-grid"></div>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="y"></span> Marché Provence</div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    renderProducts("grid");                 // ← remplit la grille depuis app.js
+    document.getElementById('y').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
