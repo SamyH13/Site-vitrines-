@@ -3,119 +3,59 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Marché Provence — Parfums Dubaï, Encens & Beauté</title>
-  <meta name="description" content="Parfums de Dubaï, encens, henné, huiles naturelles et produits de beauté. Retrouvez-nous sur les marchés de Provence.">
+  <title>Marché Provence — Parfums & Senteurs</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="admin-off">
+<body>
 
-  <!-- HEADER -->
+  <!-- HEADER / NAVBAR -->
   <header>
-    <nav class="navbar">
-      <a class="logo" id="logoSecret" title="Appui long = admin">
-        <img src="assets/logo.png" alt="Logo Marché Provence">
+    <nav class="navbar container">
+      <a class="logo" href="index.html">
+        <img src="assets/logo.png" alt="Marché Provence">
       </a>
       <ul class="nav-links">
-        <li><a href="#photos">Photos</a></li>
-        <li><a href="#produits">Produits</a></li>
-        <li><a href="#avis">Avis</a></li>
-        <li><a href="#votes">Idées & votes</a></li>
-        <li><a href="#marches">Marchés</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="produits.html">Produits</a></li>
+        <li><a href="marches.html">Marchés</a></li>
+        <li><a href="photos.html">Photos</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="#apropos">À propos</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- HERO -->
-  <section class="hero" id="photos">
+  <section class="hero">
     <div class="container wrap">
-      <div>
-        <h1>Marché Provence — Parfums Dubaï, Encens & Soins</h1>
-        <p>Découvrez nos parfums inspirés de Dubaï, encens bakhoor, produits de beauté, henné, et huiles naturelles. Suivez nos dates de marché et profitez de nos offres.</p>
+      <div class="hero-text">
+        <h1>Découvrez nos parfums & senteurs inspirés de la Provence</h1>
+        <p>Parfums, encens, huiles et soins. Retrouvez-nous sur les marchés chaque semaine.</p>
         <div class="cta">
-          <a class="btn" href="#produits">Voir les produits</a>
-          <a class="btn secondary" href="#marches">Prochain marché</a>
+          <a class="btn" href="produits.html">Voir les produits</a>
+          <a class="btn secondary" href="marches.html">Prochains marchés</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- PRODUITS -->
-  <section id="produits" class="produits">
-    <h2>Nos Produits</h2>
-    <div class="produits-grid" id="productsGrid"><!-- rendu JS --></div>
-    <div id="productsAdminBar" class="admin-tools" style="display:none;margin-top:14px;">
-      <button class="admin-btn" onclick="addProduct()">➕ Ajouter un produit</button>
-      <button class="admin-btn" onclick="exportData()">💾 Exporter</button>
-      <label class="admin-btn" style="cursor:pointer;">
-        📥 Importer <input type="file" id="importFile" accept="application/json" style="display:none">
-      </label>
-    </div>
-  </section>
-
-  <!-- AVIS (placeholder) -->
-  <section id="avis" class="container">
-    <div class="section-title">
-      <h2>Avis clients</h2>
-      <p class="small">Bientôt : avis par produit.</p>
-    </div>
-  </section>
-
-  <!-- VOTES (placeholder) -->
-  <section id="votes" class="container" style="padding:24px 20px;">
-    <h2>Idées & votes</h2>
-    <p class="small">Bientôt : proposez des nouveautés et votez.</p>
-  </section>
-
-  <!-- MARCHÉS -->
-  <section id="marches" class="container">
-    <div class="section-title" style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
-      <div>
-        <h2>Dates des marchés</h2>
-        <p>Retrouvez-nous chaque semaine sur les marchés de la région.</p>
-      </div>
-      <div id="marketsAdminBar" class="admin-tools" style="display:none;">
-        <button class="admin-btn" onclick="addMarket()">➕ Ajouter une date</button>
+      <div class="hero-img">
+        <img src="assets/hero-flacon.jpg" alt="Parfum Provence">
       </div>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Date</th><th>Ville</th><th>Lieu</th><th>Horaires</th>
-          <th class="admin-only">Actions</th>
-        </tr>
-      </thead>
-      <tbody id="marketsBody"><!-- rendu JS --></tbody>
-    </table>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="container">
-    <div class="section-title"><h2>Contact</h2></div>
-    <p>Email : <a href="#" id="contactEmail">contact@exemple.com</a></p>
-    <p>Téléphone : <span id="contactPhone">06 00 00 00 00</span></p>
-    <p>Instagram : <span id="contactInsta">@marcheprovence</span></p>
-    <div id="contactAdminBar" class="admin-tools" style="display:none;">
-      <button class="admin-btn" onclick="editContact()">✏️ Modifier le contact</button>
-    </div>
+  <!-- A PROPOS -->
+  <section id="apropos" class="container">
+    <h2>À propos</h2>
+    <p>Marché Provence, c’est une sélection de parfums de qualité à prix abordables, directement sur vos marchés locaux.</p>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <div class="container">
-      © <span id="year"></span> Marché Provence — Tous droits réservés.
+      © <span id="year"></span> Marché Provence — Tous droits réservés
     </div>
   </footer>
 
-  <!-- Bouton Admin flottant -->
-  <button id="adminBtn" class="admin-fab" aria-label="Admin">⚙️</button>
-
-  <!-- Panneau indicateur Admin -->
-  <div id="adminPanel" style="display:none;position:fixed;bottom:84px;right:16px;
-       background:#1f1f1f;color:#fff;padding:8px 10px;border-radius:12px;z-index:10000;box-shadow:0 8px 24px rgba(0,0,0,.25);">
-    <b>Mode admin</b> — <button class="admin-btn" onclick="toggleAdmin(false)">Quitter</button>
-  </div>
-
-  <script src="app.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
