@@ -1,1 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Produits — Marché Provence</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar container">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a class="active" href="produits.html">Produits</a></li>
+      <li><a href="marches.html">Marchés</a></li>
+      <li><a href="photos.html">Photos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
 
+  <header class="hero">
+    <div class="container">
+      <div class="hero-text">
+        <h1>Nos produits</h1>
+        <p>Catalogue de parfums & senteurs — disponibles sur notre stand.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container produits">
+    <div class="produits-grid">
+
+      <!-- Carte produit 1 -->
+      <article class="card">
+        <img src="assets/pomme.jpg" alt="Parfum à la Pomme">
+        <div class="p-body">
+          <h3>Parfum à la Pomme</h3>
+          <p>Frais et fruité. Un parfum vif et rafraîchissant.</p>
+          <div class="rating">★★★★☆ <span>4,5 / 5</span></div>
+          <a class="btn" href="produit.html?id=pomme">Voir la fiche</a>
+          <a class="btn secondary" href="avis.html?id=pomme">Voir les avis</a>
+        </div>
+      </article>
+
+      <!-- Carte produit 2 -->
+      <article class="card">
+        <img src="assets/agrumes.jpg" alt="Éclat d’Agrumes">
+        <div class="p-body">
+          <h3>Éclat d’Agrumes</h3>
+          <p>Notes d’orange et citron, très fraîches.</p>
+          <div class="rating">★★★★☆ <span>4,2 / 5</span></div>
+          <a class="btn" href="produit.html?id=agrumes">Voir la fiche</a>
+          <a class="btn secondary" href="avis.html?id=agrumes">Voir les avis</a>
+        </div>
+      </article>
+
+      <!-- Carte produit 3 -->
+      <article class="card">
+        <img src="assets/alpes.jpg" alt="Soleil des Alpes">
+        <div class="p-body">
+          <h3>Soleil des Alpes</h3>
+          <p>Floral doux, parfait au quotidien.</p>
+          <div class="rating">★★★★☆ <span>4,3 / 5</span></div>
+          <a class="btn" href="produit.html?id=alpes">Voir la fiche</a>
+          <a class="btn secondary" href="avis.html?id=alpes">Voir les avis</a>
+        </div>
+      </article>
+
+      <!-- Carte produit 4 -->
+      <article class="card">
+        <img src="assets/rose.jpg" alt="Brise de Rose">
+        <div class="p-body">
+          <h3>Brise de Rose</h3>
+          <p>Élégant & floral, notes de rose veloutée.</p>
+          <div class="rating">★★★★☆ <span>4,4 / 5</span></div>
+          <a class="btn" href="produit.html?id=rose">Voir la fiche</a>
+          <a class="btn secondary" href="avis.html?id=rose">Voir les avis</a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="y"></span> Marché Provence</div>
+  </footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
