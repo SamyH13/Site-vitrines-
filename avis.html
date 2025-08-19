@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Avis — Marché Provence</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar container">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt=""></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="produits.html" class="active">Produits</a></li>
+    </ul>
+  </nav>
+
+  <main class="container" style="padding:24px 0">
+    <div id="avis-zone"></div>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="y"></span> Marché Provence</div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    renderAvis("avis-zone");                // ← affiche les avis du produit (via ?id=...)
+    document.getElementById('y').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
