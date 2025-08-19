@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marchés — Marché Provence</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar container">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt=""></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="produits.html">Produits</a></li>
+      <li><a class="active" href="marches.html">Marchés</a></li>
+      <li><a href="photos.html">Photos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="container" style="padding:24px 0">
+    <h1>Prochains marchés</h1>
+    <table class="table" id="t">
+      <thead><tr><th>Date</th><th>Ville</th><th>Lieu</th><th>Horaires</th><th>Statut</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="y"></span> Marché Provence</div>
+  </footer>
+
+  <script>
+  const marches = [
+    {date:"2025-08-24", city:"Tarascon", place:"Rue des Charretiers", time:"08:00–13:00", status:"OK"},
+    {date:"2025-08-25", city:"Arles",     place:"Place du Forum",    time:"09:00–12:30", status:"OK"}
+  ];
+  const body=document.querySelector('#t tbody');
+  body.innerHTML = marches.map(m=>`
+    <tr><td>${m.date}</td><td>${m.city}</td><td>${m.place}</td><td>${m.time}</td><td>${m.status}</td></tr>
+  `).join('');
+  document.getElementById('y').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
