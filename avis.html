@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Avis produit — Marché Provence</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar container">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt=""></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a class="active" href="produits.html">Produits</a></li>
+      <li><a href="marches.html">Marchés</a></li>
+      <li><a href="photos.html">Photos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="container" id="zone" style="padding:24px 0"></main>
+
+  <footer>
+    <div class="container">© <span id="y"></span> Marché Provence</div>
+  </footer>
+
+  <script>
+  const avisData = {
+    "pomme": {
+      name:"Parfum à la Pomme",
+      img:"assets/pomme.jpg",
+      stars:4.5,
+      items:[
+        {author:"Marie", stars:5, text:"Super parfum, tient toute la journée !", photo:"assets/avis1.jpg"},
+        {author:"Jules", stars:4, text:"Bonne odeur mais un peu légère pour moi.", photo:"assets/avis2.jpg"}
+      ]
+    },
+    "agrumes": { name:"Éclat d’Agrumes", img:"assets/agrumes.jpg", stars:4.2, items:[] },
+    "alpes":   { name:"Soleil des Alpes", img:"assets/alpes.jpg",   stars:4.3, items:[] },
+    "rose":    { name:"Brise de Rose",   img:"assets/rose.jpg",    stars:4.4, items:[] }
+  };
+  const id = new URLSearchParams(location.search).get('id') || "pomme";
+  const d = avisData[id];
+  const star = (n)=>"★".repeat(Math.round(n))+"☆".repeat(5-Math.round(n));
+
+  document.getElementById('zone').innerHTML = `
+    <section class="fiche">
+      <div class="fiche-img"><img src="${d.img}" alt="${d.name}"></div>
+      <div class="fiche-info">
+        <h1>${d.name}</h1>
+        <div class="rating">${star(d.stars)} <span>${d.stars.toFixed(1)} / 5</span></div>
+        <a class="btn" href="produit.html?id=${id}">Retour à la fiche</a>
+      </div>
+    </section>
+
+    <h2>Avis clients</h2>
+    <ul class="avis-list">
+      ${d.items.length ? d.items.map(a=>`
+        <li class="avis">
+          <img src="${a.photo}" alt="${a.author}">
+          <div>
+            <b>${a.author}</b> — ${"★".repeat(a.stars)}${"☆".repeat(5-a.stars)}
+            <p>${a.text}</p>
+          </div>
+        </li>`).join("") : "<p>Pas encore d’avis pour ce produit.</p>"}
+    </ul>
+  `;
+  document.getElementById('y').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
