@@ -144,3 +144,33 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+  }
+  .hero-content {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+  .hero-content h1 {
+    font-size: 1.5rem;
+  }
+  .hero-image img {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  /* Produits vedettes en colonne sur mobile */
+  .vedettes-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .vedettes-grid {
+    grid-template-columns: 1fr;
+  }
+}
