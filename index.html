@@ -1,83 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marché Provence</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marché Provence — Accueil</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* mini retouches pour la home */
+    .hero {
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 36px 16px; background:#f7efe3;
+    }
+    .hero-content { max-width: 560px; }
+    .hero-content h1 { font-size: clamp(26px,4.2vw,44px); line-height:1.15; margin-bottom:14px; }
+    .hero-image img { width: min(360px, 90vw); border-radius:14px; display:block; }
+    .vedettes { padding: 20px 16px; }
+    .vedettes h2 { text-align:center; letter-spacing:1px; margin: 6px 0 14px; }
+    .vedettes-grid { display:grid; gap:12px; grid-template-columns: repeat(4, minmax(160px,1fr)); }
+    .v-card { background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,.08); padding:12px; text-align:center; }
+    .v-card img { width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:8px; }
+    .v-card h3 { font-size:1.05rem; color:#4a2c2c; }
+    .v-card p { margin-top:4px; color:#c29e5d; font-weight:700; }
+    @media (max-width: 900px){ .vedettes-grid{ grid-template-columns: repeat(3, 1fr);} }
+    @media (max-width: 680px){
+      .hero{ flex-direction:column; text-align:center; }
+      .hero-image{ display:none; }              /* on cache la grosse image sur mobile */
+      .vedettes-grid{ grid-template-columns: repeat(2, 1fr); } /* 2 produits côte à côte */
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ====== HEADER ====== -->
-  <header>
-    <nav class="navbar">
-      <a class="logo" href="index.html" aria-label="Marché Provence">
-        <img src="assets/logo.png" alt="Marché Provence">
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Accueil</a></li>
-        <li><a href="produits.html">Produits</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+  <!-- NAVBAR -->
+  <header class="navbar" style="background:#fff;border-bottom:2px solid #eee;">
+    <a class="logo" href="index.html" aria-label="Marché Provence">
+      <img src="assets/logo.png" alt="Marché Provence" style="height:56px;width:auto;">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="produits.html">Produits</a></li>
+      <li><a href="avis.html?id=p1">Avis</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </header>
 
-  <!-- ====== HERO ====== -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
-      <h1>Découvrez nos parfums & senteurs<br>uniques inspirés de la Provence</h1>
-      <a href="produits.html" class="btn">Voir nos produits</a>
+      <h1>Découvrez nos parfums & senteurs<br>inspirés de la Provence</h1>
+      <p style="margin-bottom:14px;">Parfums, encens, huiles et soins. Retrouvez-nous sur les marchés chaque semaine.</p>
+      <a class="btn" href="produits.html">Voir nos produits</a>
     </div>
-    <div class="hero-image">
-      <img src="assets/hero-parfum.jpg" alt="Parfum Provence">
+    <div class="hero-image" aria-hidden="true">
+      <img src="assets/hero-parfum.jpg" alt="Flacon de parfum">
     </div>
   </section>
 
-  <!-- ====== PRODUITS VEDETTES ====== -->
+  <!-- APERÇU PRODUITS -->
   <section class="vedettes">
-    <h2>Produits</h2>
-    <div class="vedettes-grid">
-      <div class="v-card">
-        <img src="assets/parfum1.jpg" alt="Caau de Lavande">
-        <h3>Caau de Lavande</h3>
-        <p>Notes fruitées, fleurs fraîsées</p>
-      </div>
-      <div class="v-card">
-        <img src="assets/parfum2.jpg" alt="Eclat d’Agrumes">
-        <h3>Eclat d’Agrumes</h3>
-        <p>Notes fruitées, agrumes</p>
-      </div>
-      <div class="v-card">
-        <img src="assets/parfum3.jpg" alt="Soleil des Alpes">
-        <h3>Soleil des Alpes</h3>
-        <p>Notes ultrafraîches, citron</p>
-      </div>
-      <div class="v-card">
-        <img src="assets/parfum4.jpg" alt="Tatre Aromatique">
-        <h3>Tatre Aromatique</h3>
-        <p>Notes épicées, florales</p>
-      </div>
+    <h2>PRODUITS</h2>
+    <div id="home-grid" class="vedettes-grid"></div>
+    <div style="text-align:center;margin-top:10px">
+      <a class="btn" href="produits.html">Tous les produits</a>
     </div>
-    <p class="note">Disponible uniquement sur notre stand au marché</p>
   </section>
 
-  <!-- ====== A PROPOS & CONTACT ====== -->
-  <footer>
-    <div class="footer-content">
-      <div>
-        <h3>À propos</h3>
-        <p>Marché Provence, c’est une sélection de parfums de qualité à prix abordables.</p>
-      </div>
-      <div>
-        <h3>Contact</h3>
-        <p>
-          <a href="#">WhatsApp</a> · 
-          <a href="#">Instagram</a> · 
-          <a href="#">Facebook</a>
-        </p>
-      </div>
+  <!-- FOOTER -->
+  <footer id="contact" style="background:#fff;border-top:2px solid #eee;padding:24px 16px;margin-top:24px;">
+    <div class="container">
+      © <span id="year"></span> Marché Provence — Tous droits réservés
     </div>
   </footer>
 
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  <script>
+    // Remplit la grille d'accueil avec TOUTES tes références (ou .slice(0,8) pour limiter)
+    function renderHome(){
+      const box = document.getElementById('home-grid');
+      if(!box || !window.PRODUCTS) return;
+      box.innerHTML = PRODUCTS.map(p => `
+        <article class="v-card">
+          <a href="avis.html?id=${p.id}" style="text-decoration:none;color:inherit;display:block">
+            <img src="${p.img}" alt="${p.name}" onerror="this.src='';this.style.background='#eee';this.alt='Image indisponible'">
+            <h3>${p.name}</h3>
+            <p>${new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(p.price)}</p>
+          </a>
+        </article>
+      `).join('');
+      document.getElementById('year').textContent = new Date().getFullYear();
+    }
+    document.addEventListener('DOMContentLoaded', renderHome);
+  </script>
 </body>
 </html>
