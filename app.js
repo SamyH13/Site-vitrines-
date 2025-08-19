@@ -1,36 +1,36 @@
 /* =========================================================
-   Marché Provence — app.js (version "actifs/")
+   Marché Provence — app.js (version assets/)
    - Grille produits + prix
    - Mode édition des prix (localStorage)
    - Page avis par produit
    ========================================================= */
 
-/* ---------- Données par défaut (modifie les textes si tu veux) ---------- */
+/* ---------- Données par défaut ---------- */
 const DEFAULT_PRODUCTS = [
   { id:"p1", name:"Dubai Noir",  short:"Intense & élégant",
     long:"Notes boisées et épicées avec une tenue remarquable.",
-    stars:4.6, img:"actifs/parfum1.jpg", price:19.90 },
+    stars:4.6, img:"assets/parfum1.jpg", price:19.90 },
 
   { id:"p2", name:"Yara Dubai",  short:"Oriental doux",
     long:"Gourmand, vanille et musc, très apprécié au stand.",
-    stars:4.7, img:"actifs/parfum2.jpg", price:22.00 },
+    stars:4.7, img:"assets/parfum2.jpg", price:22.00 },
 
   { id:"p3", name:"Dubai Vert",  short:"Frais & luxueux",
     long:"Vert aromatique, propre et lumineux pour le soir.",
-    stars:4.4, img:"actifs/parfum3.jpg", price:21.50 },
+    stars:4.4, img:"assets/parfum3.jpg", price:21.50 },
 
   { id:"p4", name:"Oud Desert",  short:"Ambré & chaleureux",
     long:"Oud doux, ambré, avec une belle projection et tenue.",
-    stars:4.5, img:"actifs/parfum4.jpg", price:24.00 }
+    stars:4.5, img:"assets/parfum4.jpg", price:24.00 }
 ];
 
-/* ---------- Avis (exemple simple) ---------- */
+/* ---------- Avis (exemple) ---------- */
 const REVIEWS = {
   p1: [
-    { author:"Lina",  stars:5, text:"Super classe, tient très bien toute la journée.", photo:"actifs/parfum1.jpg" }
+    { author:"Lina",  stars:5, text:"Super classe, tient très bien toute la journée.", photo:"assets/parfum1.jpg" }
   ],
   p2: [
-    { author:"Yanis", stars:5, text:"Coup de cœur au stand, très doux.", photo:"actifs/parfum2.jpg" }
+    { author:"Yanis", stars:5, text:"Coup de cœur au stand, très doux.", photo:"assets/parfum2.jpg" }
   ],
   p3: [],
   p4: []
@@ -63,7 +63,6 @@ let EDIT_MODE = false;
 
 /* =========================================================
    Rendu : Page Produits (grille)
-   Appelée depuis produits.html avec renderProducts("grid")
    ========================================================= */
 function renderProducts(targetId){
   const el = document.getElementById(targetId);
@@ -90,7 +89,6 @@ function renderProducts(targetId){
     </article>
   `).join('');
 
-  // si on est en édition, écouter les changements
   if (EDIT_MODE){
     document.querySelectorAll('.price-input').forEach(inp=>{
       inp.addEventListener('change', e=>{
@@ -104,7 +102,6 @@ function renderProducts(targetId){
 
 /* =========================================================
    Rendu : Page Avis d’un produit
-   Appelée depuis avis.html avec renderAvis("avis-zone")
    ========================================================= */
 function renderAvis(targetId){
   const zone = document.getElementById(targetId);
@@ -148,9 +145,6 @@ function renderAvis(targetId){
 
 /* =========================================================
    Barre Admin (produits.html)
-   - Bouton "Mode édition prix"
-   - "Enregistrer" (localStorage)
-   - "Réinitialiser"
    ========================================================= */
 function attachAdminBar(){
   const bar = document.getElementById('admin-bar');
@@ -179,7 +173,7 @@ function attachAdminBar(){
 }
 
 /* =========================================================
-   Expose les fonctions au global (pour les pages HTML)
+   Expose global
    ========================================================= */
 window.renderProducts  = renderProducts;
 window.renderAvis      = renderAvis;
