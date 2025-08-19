@@ -1,113 +1,83 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Marché Provence — Parfums & senteurs</title>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    /* mini retouches pour la home façon maquette */
-    .hero-home{
-      background: radial-gradient(1200px 500px at 80% 0%, rgba(0,0,0,.08), transparent),
-                  linear-gradient(135deg,#d2b27a,#f0e1c8);
-      color:#2a1a1a;
-      padding: clamp(36px, 6vw, 72px) 0;
-    }
-    .hero-wrap{ display:grid; gap:28px; grid-template-columns: 1.1fr 1fr; align-items:center; }
-    .hero-title{ font-size:clamp(28px,4.2vw,48px); line-height:1.1; font-weight:800; letter-spacing:.5px; }
-    .hero-sub{ font-size:clamp(16px,2.5vw,20px); opacity:.95; margin:12px 0 20px; }
-    .hero-cta{ display:flex; gap:12px; flex-wrap:wrap; }
-    .hero-img{
-      width:100%; aspect-ratio: 4/5; border-radius:18px; overflow:hidden;
-      box-shadow: 0 10px 40px rgba(0,0,0,.18); background:#fff6e8;
-    }
-    .hero-img img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-    .section-title{ text-align:center; letter-spacing:2px; margin:28px 0 18px; font-size:28px; }
-    .home-grid .card img{ height:160px; }      /* vignettes plus compactes sur la home */
-    @media (max-width:900px){ .hero-wrap{ grid-template-columns:1fr } }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marché Provence</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <header class="navbar container">
-    <a class="logo" href="index.html" aria-label="Marché Provence">
-      <!-- place ton logo ici: assets/logo.png -->
-      <img src="assets/logo.png" alt="Marché Provence" />
-    </a>
-    <ul class="nav-links">
-      <li><a href="produits.html">Produits</a></li>
-      <li><a href="avis.html?id=p1">Avis</a></li>
-      <li><a href="#apropos">À propos</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+  <!-- ====== HEADER ====== -->
+  <header>
+    <nav class="navbar">
+      <a class="logo" href="index.html" aria-label="Marché Provence">
+        <img src="assets/logo.png" alt="Marché Provence">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Accueil</a></li>
+        <li><a href="produits.html">Produits</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="hero-home">
-    <div class="container hero-wrap">
+  <!-- ====== HERO ====== -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Découvrez nos parfums & senteurs<br>uniques inspirés de la Provence</h1>
+      <a href="produits.html" class="btn">Voir nos produits</a>
+    </div>
+    <div class="hero-image">
+      <img src="assets/hero-parfum.jpg" alt="Parfum Provence">
+    </div>
+  </section>
+
+  <!-- ====== PRODUITS VEDETTES ====== -->
+  <section class="vedettes">
+    <h2>Produits</h2>
+    <div class="vedettes-grid">
+      <div class="v-card">
+        <img src="assets/parfum1.jpg" alt="Caau de Lavande">
+        <h3>Caau de Lavande</h3>
+        <p>Notes fruitées, fleurs fraîsées</p>
+      </div>
+      <div class="v-card">
+        <img src="assets/parfum2.jpg" alt="Eclat d’Agrumes">
+        <h3>Eclat d’Agrumes</h3>
+        <p>Notes fruitées, agrumes</p>
+      </div>
+      <div class="v-card">
+        <img src="assets/parfum3.jpg" alt="Soleil des Alpes">
+        <h3>Soleil des Alpes</h3>
+        <p>Notes ultrafraîches, citron</p>
+      </div>
+      <div class="v-card">
+        <img src="assets/parfum4.jpg" alt="Tatre Aromatique">
+        <h3>Tatre Aromatique</h3>
+        <p>Notes épicées, florales</p>
+      </div>
+    </div>
+    <p class="note">Disponible uniquement sur notre stand au marché</p>
+  </section>
+
+  <!-- ====== A PROPOS & CONTACT ====== -->
+  <footer>
+    <div class="footer-content">
       <div>
-        <h1 class="hero-title">Découvrez nos<br/> parfums & senteurs<br/> inspirés de la Provence</h1>
-        <p class="hero-sub">Parfums, encens, huiles et soins. Retrouvez-nous sur les marchés chaque semaine.</p>
-        <div class="hero-cta">
-          <a class="btn" href="produits.html">VOIR NOS PRODUITS</a>
-          <a class="btn secondary" href="#apropos">À PROPOS</a>
-        </div>
+        <h3>À propos</h3>
+        <p>Marché Provence, c’est une sélection de parfums de qualité à prix abordables.</p>
       </div>
-      <div class="hero-img" aria-hidden="true">
-        <!-- on affiche une belle photo du flacon (utilise l’une de tes images) -->
-        <img src="assets/parfum2.jpg" alt="Flacon de parfum" />
+      <div>
+        <h3>Contact</h3>
+        <p>
+          <a href="#">WhatsApp</a> · 
+          <a href="#">Instagram</a> · 
+          <a href="#">Facebook</a>
+        </p>
       </div>
-    </div>
-  </section>
-
-  <!-- PRODUITS (aperçu) -->
-  <section class="produits">
-    <div class="container">
-      <h2 class="section-title">PRODUITS</h2>
-      <div id="home-grid" class="produits-grid home-grid"></div>
-      <div style="text-align:center; margin-top:10px">
-        <a class="btn" href="produits.html">Tous les produits</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- À PROPOS -->
-  <section id="apropos" class="container" style="padding:24px 0 8px">
-    <h2 style="margin:0 0 8px">À PROPOS</h2>
-    <p>Marché Provence, c’est une sélection de parfums de qualité à prix abordables,
-       proposés directement sur nos marchés locaux.</p>
-  </section>
-
-  <!-- CONTACT -->
-  <footer id="contact">
-    <div class="container">
-      © <span id="y"></span> Marché Provence — Tous droits réservés
     </div>
   </footer>
 
-  <script src="app.js"></script>
-  <script>
-    // on réutilise tes données pour afficher 8 cartes en aperçu
-    function renderHome(){
-      const list = document.getElementById('home-grid');
-      if(!list) return;
-      const items = (window.PRODUCTS || []).slice(0,8).map(p => `
-        <article class="card">
-          <a href="produit.html?id=${p.id}" style="text-decoration:none;color:inherit;display:block">
-            ${imgTag(p.img, p.name)}
-            <h3>${p.name}</h3>
-            <p>${p.short}</p>
-            <div class="p-price">${new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(p.price)}</div>
-          </a>
-        </article>
-      `).join('');
-      list.innerHTML = items;
-      document.getElementById('y').textContent = new Date().getFullYear();
-    }
-    // charge puis rend
-    document.addEventListener('DOMContentLoaded', renderHome);
-  </script>
 </body>
 </html>
