@@ -174,3 +174,27 @@ footer a:hover {
     grid-template-columns: 1fr;
   }
 }
+/* Home plus compacte */
+.hero { padding: 28px 16px; }
+.hero-image img { max-width: 260px; border-radius: 12px; }
+
+/* Cartes produits compactes */
+.vedettes { padding: 20px 16px; }
+.vedettes h2 { margin-bottom: 10px; }
+.vedettes-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(150px,1fr)); /* desktop */
+}
+.v-card { padding: 10px; }
+.v-card img { height: 140px; object-fit: cover; }
+
+/* — responsive — */
+@media (max-width: 992px){
+  .vedettes-grid { grid-template-columns: repeat(3, minmax(140px,1fr)); }
+}
+@media (max-width: 680px){            /* → 2 produits côte à côte */
+  .hero { padding: 18px 14px; text-align:center; }
+  .hero-image { display: none; }      /* on cache la grosse image */
+  .vedettes-grid { grid-template-columns: repeat(2, 1fr); }
+}
