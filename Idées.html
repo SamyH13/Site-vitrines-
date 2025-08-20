@@ -1,19 +1,48 @@
-<!doctype html><html lang="fr"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Idées & votes — Marché Provence</title>
-<link rel="stylesheet" href="styles.css"></head><body>
-<header class="navbar">
-  <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence" style="height:56px"></a>
-  <ul class="nav-links">
-    <li><a href="produits.html">Produits</a></li>
-    <li><a href="idees.html" class="active">Idées</a></li>
-  </ul>
-</header>
-<section class="container">
-  <h2>Propositions & votes</h2>
-  <div id="ideas-zone"></div>
-  <div class="admin-tools" style="justify-content:flex-end"><button class="mini" onclick="saveAll()">Enregistrer</button></div>
-</section>
-<script src="app.js"></script>
-<script>document.addEventListener('DOMContentLoaded', ()=>renderIdeas('ideas-zone'));</script>
-</body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Idées & Sondages — Marché Provence</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar container">
+      <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence"></a>
+      <ul class="nav-links">
+        <li><a href="produits.html">Produits</a></li>
+        <li><a href="marches.html">Prochains Marchés</a></li>
+        <li><a href="avis.html">Avis Clients</a></li>
+        <li><a class="active" href="Idées.html">Idées &amp; Sondages</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Idées &amp; Sondages</h1>
+    <p>Votez pour nos prochaines nouveautés et proposez vos idées.</p>
+
+    <div id="polls" class="produits-grid"></div>
+
+    <section style="margin:40px 0">
+      <h2>Proposer une idée</h2>
+      <form id="ideaForm" class="card" style="text-align:left">
+        <label>Votre idée</label>
+        <input id="ideaTitle" placeholder="Ex: Format 30 ml de voyage" required style="width:100%;padding:10px;border:1px solid var(--stroke);border-radius:10px;margin:.4rem 0 1rem">
+        <label>Détail (optionnel)</label>
+        <textarea id="ideaDesc" rows="4" placeholder="Dites-nous pourquoi ça vous plairait…" style="width:100%;padding:10px;border:1px solid var(--stroke);border-radius:10px"></textarea>
+        <div style="margin-top:12px">
+          <button class="btn" type="submit">Envoyer l’idée</button>
+          <small style="margin-left:10px;color:var(--muted)">* Démo: enregistrement local.</small>
+        </div>
+      </form>
+      <ul id="ideasList" class="avis-list"></ul>
+    </section>
+  </main>
+
+  <footer><div class="container">© <span id="year"></span> Marché Provence</div></footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  <script src="js/idees.js"></script> <!-- si tu utilises le script dédié -->
+</body>
+</html>
