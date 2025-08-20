@@ -1,22 +1,32 @@
-<!-- photos.html -->
-<!doctype html><html lang="fr"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Photos — Marché Provence</title><link rel="stylesheet" href="styles.css"></head>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Produits — Marché Provence</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
 <body>
-<header class="navbar">
-  <a class="logo" href="index.html"><img src="assets/logo.png" alt=""/></a>
-  <nav>
-    <a class="nav" href="index.html">Accueil</a>
-    <a class="nav" href="produits.html">Produits</a>
-    <a class="nav" href="marches.html">Marchés</a>
-    <a class="nav active" href="photos.html">Photos</a>
-    <a class="nav" href="contact.html">Contact</a>
-  </nav>
-</header>
-<section class="intro"><h1>Photos du stand</h1><p>Ajoute tes images dans <code>assets/</code>.</p></section>
-<div id="gallery" class="grid"></div>
-<footer class="footer">© Marché Provence</footer>
-<button id="admin-fab" class="fab">⚙️</button>
-<script src="app.js"></script>
-<script>document.addEventListener('DOMContentLoaded',()=>{renderGallery('gallery');attachAdmin('Photos');});</script>
-</body></html>
+  <header>
+    <nav class="navbar container">
+      <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence"></a>
+      <ul class="nav-links">
+        <li><a class="active" href="produits.html">Produits</a></li>
+        <li><a href="marches.html">Prochains Marchés</a></li>
+        <li><a href="avis.html">Avis Clients</a></li>
+        <li><a href="Idées.html">Idées &amp; Sondages</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Nos Produits</h1>
+    <div id="liste-produits" class="produits-grid"></div>
+  </main>
+
+  <footer><div class="container">© <span id="year"></span> Marché Provence</div></footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
