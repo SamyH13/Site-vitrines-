@@ -1,119 +1,87 @@
-/* ========== RESET & BASE ========== */
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.55;background:#fff8f0;color:#333}
-a{color:inherit}
-
-/* ========== NAVBAR ========== */
-.navbar{
-  position:sticky;top:0;z-index:1000;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 16px;background:#fff;border-bottom:1px solid #eee
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #faf6f0;
+  color: #3d2a2a;
 }
-.logo img{height:56px;display:block}
-.nav-links{list-style:none;display:flex;gap:14px;margin:0;padding:0}
-.nav-links a{display:inline-block;padding:10px 12px;text-decoration:none;color:#3a2a2a;font-weight:600;border-radius:8px}
-.nav-links a.active{box-shadow:inset 0 -3px 0 #6f24d2}
 
-/* ========== BOUTONS ========== */
-.btn{display:inline-block;padding:12px 16px;border-radius:10px;background:#6f24d2;color:#fff;text-decoration:none;font-weight:700;border:2px solid #6f24d2}
-.btn:hover{filter:brightness(1.07)}
-.btn.secondary{background:transparent;color:#6f24d2}
-.btn.small{padding:8px 10px;font-weight:600}
+header {
+  background: #fff8f2;
+  border-bottom: 1px solid #ddd;
+}
 
-/* ========== CONTENEURS ========== */
-.container{width:min(1100px,92%);margin:0 auto}
-section{padding:18px 0}
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+}
+.navbar .logo { height: 40px; }
+.navbar ul { list-style: none; display: flex; gap: 16px; margin: 0; padding: 0; }
+.navbar a { text-decoration: none; color: #3d2a2a; font-weight: 600; }
+.navbar a.active, .navbar a:hover { color: #6f24d2; }
 
-/* ========== GRILLE PRODUITS (page produits) ========== */
-#grid{
-  display:grid;gap:16px;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  padding:16px
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f3ede5;
+}
+.hero h1 { max-width: 600px; margin: 0 auto 20px; }
+.btn {
+  background: #6f24d2;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.btn:hover { background: #5319a6; }
+
+/* BEST SELLERS */
+.best-section{ background:#fff; padding:16px 0 8px; }
+.best-strip{
+  display:flex; gap:12px; overflow-x:auto; padding-bottom:6px; scroll-snap-type:x mandatory;
+}
+.best-card{
+  position:relative; flex:0 0 180px; background:#fff; border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.08); overflow:hidden; text-decoration:none; color:inherit;
+  scroll-snap-align:start;
+}
+.best-card img{ width:100%; height:140px; object-fit:cover; display:block; background:#f2eee7; }
+.best-info{ padding:8px; display:flex; justify-content:space-between; align-items:center; }
+.best-name{ font-weight:700; font-size:.95rem; margin-right:6px; color:#3d2a2a; }
+.best-price{ color:#c29e5d; font-weight:700; font-size:.95rem; }
+.best-badge{
+  position:absolute; top:8px; left:8px; background:#6f24d2; color:#fff; font-size:.75rem;
+  padding:4px 8px; border-radius:999px; box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+
+/* PRODUITS */
+.products { padding: 40px 20px; background:#faf6f0; }
+.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap:16px;
 }
 .card{
-  background:#fff;border-radius:12px;box-shadow:0 3px 8px rgba(0,0,0,.08);
-  overflow:hidden;text-align:center;padding-bottom:12px
+  background:#fff; padding:12px; border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1); position:relative;
 }
-.card img{width:100%;height:180px;object-fit:cover;display:block;background:#f2eee7}
-.card h3{font-size:1rem;margin:8px 0 2px;color:#4a2c2c}
-.card p{color:#555;font-size:.9rem;margin:0}
-.card .rating{margin:6px 0;font-size:.92rem;color:#704a4a}
-.card .rating span{opacity:.8}
-.card .p-price{margin:6px 0;color:#c29e5d;font-weight:700}
-.card-link{display:block;text-decoration:none;color:inherit}
+.card img{ width:100%; border-radius:8px; }
+.card h3{ margin:8px 0 4px; }
+.card .p-price{ font-weight:bold; color:#c29e5d; }
+.card .stockline{ font-size:.85rem; margin:6px 0; }
 
-/* Badges stock */
-.badge{display:inline-block;padding:3px 8px;border-radius:10px;font-size:.8rem}
-.badge.ok{background:#e7f8ec;color:#2e7d32}
-.badge.warn{background:#fff4e5;color:#b76e00}
-.badge.danger{background:#ffe6e6;color:#c62828}
-.stockline{min-height:22px}
-
-/* Champs édition prix/stock (mode admin) */
-.price-input,.stock-input,.price-edit,.stock-edit{
-  border:1px solid #ccc;border-radius:8px;padding:6px 8px;font:inherit;width:90px
+/* BADGE Best seller */
+.badge.best{
+  position:absolute; top:8px; left:8px; background:#6f24d2; color:#fff;
+  padding:3px 8px; border-radius:999px; font-size:.78rem; box-shadow:0 2px 6px rgba(0,0,0,.15);
 }
 
-/* ========== FICHE PRODUIT ========== */
-.produit-detail .card.big{max-width:900px;margin:0 auto 18px;padding:12px}
-.produit-detail .card.big img{width:100%;max-height:340px;object-fit:cover}
-.btn-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-
-/* Suggestions (carrousel horizontal) */
-.carousel{display:flex;gap:12px;overflow-x:auto;padding:10px 2px;scroll-snap-type:x proximity}
-.carousel::-webkit-scrollbar{height:8px}
-.carousel::-webkit-scrollbar-thumb{background:#d8c8a6;border-radius:8px}
-.sugg-card{flex:0 0 180px;background:#fff;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.07);text-align:center;scroll-snap-align:start}
-.sugg-card img{width:100%;height:140px;object-fit:cover;border-radius:10px 10px 0 0}
-.sugg-card h4{font-size:.95rem;margin:6px 0 2px}
-.sugg-card p{color:#c29e5d;font-weight:700;margin-bottom:8px}
-
-/* ========== TABLE MARCHÉS ========== */
-.table{width:100%;border-collapse:collapse;background:#fff}
-.table th,.table td{border:1px solid #ead8b5;padding:8px;text-align:left}
-.admin-tools{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-.mini{padding:6px 8px;border:1px solid #bbb;border-radius:8px;background:#fff;cursor:pointer}
-.mini.danger{border-color:#d33;color:#d33}
-
-/* ========== PHOTOS ========== */
-.photos-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
-.photos-grid figure{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.06);margin:0}
-.photos-grid img{width:100%;height:160px;object-fit:cover;display:block}
-.photos-grid figcaption{padding:6px 8px;font-size:.9rem}
-
-/* ========== IDÉES & VOTES ========== */
-.ideas-list{list-style:none;display:grid;gap:12px;padding:0}
-.ideas-list li{background:#fff;border-radius:10px;padding:10px;box-shadow:0 2px 6px rgba(0,0,0,.06)}
-.idea-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.idea-actions{display:flex;gap:6px;align-items:center;margin-top:6px;flex-wrap:wrap}
-.comment-inp{border:1px solid #ccc;border-radius:8px;padding:6px 8px;font:inherit}
-.comments .cmt{font-size:.9rem;padding:4px 0;border-top:1px solid #eee}
-
-/* ========== HERO (page accueil) ========== */
-.hero{display:flex;align-items:center;justify-content:space-between;padding:36px 16px;background:#f7efe3}
-.hero-content{max-width:560px}
-.hero-content h1{font-size:clamp(26px,4.2vw,44px);line-height:1.15;margin-bottom:14px}
-.hero-image img{width:min(360px,90vw);border-radius:14px;display:block}
-@media (max-width:680px){
-  .hero{flex-direction:column;text-align:center}
-  .hero-image{display:none}
-}
-
-/* ========== VIGNETTES ACCUEIL ========== */
-.vedettes{padding:20px 16px}
-.vedettes h2{text-align:center;letter-spacing:1px;margin:6px 0 14px}
-.vedettes-grid{display:grid;gap:12px;grid-template-columns:repeat(4,minmax(160px,1fr))}
-.v-card{background:#fff;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.08);padding:12px;text-align:center}
-.v-card img{width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:8px}
-.v-card h3{font-size:1.05rem;color:#4a2c2c}
-.v-card p{margin-top:4px;color:#c29e5d;font-weight:700}
-@media (max-width:900px){.vedettes-grid{grid-template-columns:repeat(3,1fr)}}
-@media (max-width:680px){.vedettes-grid{grid-template-columns:repeat(2,1fr)}}
-
-/* ========== ADMIN FAB ========== */
-.admin-fab{
-  position:fixed;right:16px;bottom:16px;z-index:9999;width:56px;height:56px;
-  border-radius:50%;border:none;background:#6f24d2;color:#fff;font-size:22px;
-  box-shadow:0 8px 22px rgba(0,0,0,.25);cursor:pointer
+footer {
+  text-align:center;
+  padding:20px;
+  background:#fff8f2;
+  font-size:.85rem;
+  margin-top:40px;
 }
