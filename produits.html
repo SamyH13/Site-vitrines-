@@ -1,41 +1,41 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Produits — Marché Provence</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-  <nav class="navbar container">
-    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence"></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Accueil</a></li>
-      <li><a class="active" href="produits.html">Produits</a></li>
-    </ul>
-  </nav>
-
-  <header class="hero">
-    <div class="container">
-      <div class="hero-text">
-        <h1>Nos produits</h1>
-        <p>Catalogue vitrine — disponibles sur notre stand.</p>
-      </div>
-    </div>
+  <header class="navbar">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence"/></a>
+    <nav>
+      <a class="nav" href="index.html">Accueil</a>
+      <a class="nav active" href="produits.html">Produits</a>
+      <a class="nav" href="marches.html">Marchés</a>
+      <a class="nav" href="photos.html">Photos</a>
+      <a class="nav" href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <main class="container produits">
-    <div id="grid" class="produits-grid"></div>
-  </main>
+  <section class="intro">
+    <h1>Nos produits</h1>
+    <p>Catalogue vitrine — disponibles sur notre stand.</p>
+  </section>
 
-  <footer>
-    <div class="container">© <span id="y"></span> Marché Provence</div>
-  </footer>
+  <section class="preview">
+    <div id="all-products" class="grid"></div>
+  </section>
+
+  <footer class="footer">© Marché Provence</footer>
+  <button id="admin-fab" class="fab" title="Admin">⚙️</button>
 
   <script src="app.js"></script>
   <script>
-    renderProducts("grid");                 // ← remplit la grille depuis app.js
-    document.getElementById('y').textContent=new Date().getFullYear();
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts('all-products');        // tout le catalogue
+      attachAdmin('Produits');               // mode édition prix/stock/desc
+    });
   </script>
 </body>
 </html>
