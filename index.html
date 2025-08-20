@@ -1,57 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marché Provence</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Marché Provence — Accueil</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <img src="assets/logo.png" alt="Logo Marché Provence" class="logo">
-      <ul>
-        <li><a href="index.html" class="active">Accueil</a></li>
-        <li><a href="produits.html">Produits</a></li>
-        <li><a href="marches.html">Marchés</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+  <header class="navbar">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence"/></a>
+    <nav>
+      <a class="nav" href="index.html">Accueil</a>
+      <a class="nav" href="produits.html">Produits</a>
+      <a class="nav" href="marches.html">Marchés</a>
+      <a class="nav" href="photos.html">Photos</a>
+      <a class="nav" href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <h1>Découvrez nos parfums & senteurs uniques inspirés de la Provence</h1>
-      <a href="produits.html" class="btn">Voir nos produits</a>
+  <!-- HERO = l'image que tu veux, plein écran -->
+  <section class="hero-visual">
+    <div class="hero-inner">
+      <h1>Découvrez nos parfums &amp; senteurs<br/>uniques inspirés de la Provence</h1>
+      <a class="btn" href="produits.html">Voir nos produits</a>
     </div>
   </section>
 
-  <!-- BEST SELLERS -->
-  <section class="best-section">
-    <div class="container">
-      <h2 class="title-center" style="margin-bottom:10px">BEST-SELLERS</h2>
-      <div id="best-strip" class="best-strip"></div>
-    </div>
+  <!-- Best sellers -->
+  <section class="best">
+    <h2>Best-sellers</h2>
+    <div id="best-strip" class="strip"></div>
   </section>
 
-  <!-- PRODUITS -->
-  <section class="products">
-    <div class="container">
-      <h2>PRODUITS</h2>
-      <div id="product-list" class="grid"></div>
-    </div>
+  <!-- Aperçu Produits -->
+  <section class="preview">
+    <h2>Produits</h2>
+    <div id="home-grid" class="grid"></div>
+    <div class="center"><a class="btn ghost" href="produits.html">Tous les produits</a></div>
   </section>
 
-  <footer>
-    <p>© Marché Provence — Tous droits réservés</p>
-  </footer>
+  <footer class="footer">© Marché Provence — Tous droits réservés</footer>
+
+  <!-- Bouton admin -->
+  <button id="admin-fab" class="fab" title="Admin">⚙️</button>
 
   <script src="app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      if (window.renderProducts) renderProducts('product-list');
-      if (window.renderBestSellers) renderBestSellers('best-strip', 6);
+      renderBestSellers('best-strip', 6);
+      renderProducts('home-grid', 6); // aperçu 6 items
+      attachAdmin('Accueil');
     });
   </script>
 </body>
