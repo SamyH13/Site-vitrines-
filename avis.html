@@ -3,30 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Avis — Marché Provence</title>
+  <title>Avis Clients — Marché Provence</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav class="navbar container">
-    <a class="logo" href="index.html"><img src="assets/logo.png" alt=""></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="produits.html" class="active">Produits</a></li>
-    </ul>
-  </nav>
+  <header>
+    <nav class="navbar container">
+      <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence"></a>
+      <ul class="nav-links">
+        <li><a href="produits.html">Produits</a></li>
+        <li><a href="marches.html">Prochains Marchés</a></li>
+        <li><a class="active" href="avis.html">Avis Clients</a></li>
+        <li><a href="Idées.html">Idées &amp; Sondages</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <main class="container" style="padding:24px 0">
-    <div id="avis-zone"></div>
+  <main class="container">
+    <div id="avis-container"><!-- rendu JS --></div>
   </main>
 
-  <footer>
-    <div class="container">© <span id="y"></span> Marché Provence</div>
-  </footer>
-
+  <footer><div class="container">© <span id="year"></span> Marché Provence</div></footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  <script src="data.js"></script>
   <script src="app.js"></script>
-  <script>
-    renderAvis("avis-zone");                // ← affiche les avis du produit (via ?id=...)
-    document.getElementById('y').textContent=new Date().getFullYear();
-  </script>
 </body>
 </html>
