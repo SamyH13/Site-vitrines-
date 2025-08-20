@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Produit — Marché Provence</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence"/></a>
+    <nav>
+      <a class="nav" href="index.html">Accueil</a>
+      <a class="nav" href="produits.html">Produits</a>
+      <a class="nav" href="marches.html">Marchés</a>
+      <a class="nav" href="photos.html">Photos</a>
+      <a class="nav" href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main id="fiche"></main>
+
+  <footer class="footer">© Marché Provence</footer>
+  <button id="admin-fab" class="fab" title="Admin">⚙️</button>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderFiche('fiche');  // affiche la fiche à partir de ?id=pX
+      attachAdmin('Fiche');  // permet d’éditer ce produit
+    });
+  </script>
+</body>
+</html>
