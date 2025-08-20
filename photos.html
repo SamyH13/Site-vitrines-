@@ -1,20 +1,22 @@
+<!-- photos.html -->
 <!doctype html><html lang="fr"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Photos — Marché Provence</title>
-<link rel="stylesheet" href="styles.css"></head><body>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Photos — Marché Provence</title><link rel="stylesheet" href="styles.css"></head>
+<body>
 <header class="navbar">
-  <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence" style="height:56px"></a>
-  <ul class="nav-links">
-    <li><a href="produits.html">Produits</a></li>
-    <li><a href="marches.html">Marchés</a></li>
-    <li><a class="active" href="photos.html">Photos</a></li>
-  </ul>
+  <a class="logo" href="index.html"><img src="assets/logo.png" alt=""/></a>
+  <nav>
+    <a class="nav" href="index.html">Accueil</a>
+    <a class="nav" href="produits.html">Produits</a>
+    <a class="nav" href="marches.html">Marchés</a>
+    <a class="nav active" href="photos.html">Photos</a>
+    <a class="nav" href="contact.html">Contact</a>
+  </nav>
 </header>
-<section class="container">
-  <h2>Photos du stand</h2>
-  <div id="photos-zone"></div>
-  <div class="admin-tools" style="justify-content:flex-end"><button class="mini" onclick="saveAll()">Enregistrer</button></div>
-</section>
+<section class="intro"><h1>Photos du stand</h1><p>Ajoute tes images dans <code>assets/</code>.</p></section>
+<div id="gallery" class="grid"></div>
+<footer class="footer">© Marché Provence</footer>
+<button id="admin-fab" class="fab">⚙️</button>
 <script src="app.js"></script>
-<script>document.addEventListener('DOMContentLoaded', ()=>renderPhotos('photos-zone'));</script>
+<script>document.addEventListener('DOMContentLoaded',()=>{renderGallery('gallery');attachAdmin('Photos');});</script>
 </body></html>
