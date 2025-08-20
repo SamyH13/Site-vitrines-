@@ -1,136 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Marché Provence — Accueil</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marché Provence</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- NAV -->
-  <header class="navbar">
-    <a class="logo" href="#top"><img src="assets/logo.png" alt="Marché Provence"></a>
-    <ul class="nav-links">
-      <li><a class="active" href="#top">Accueil</a></li>
-      <li><a href="#produits">Produits</a></li>
-      <li><a href="#marches">Marchés</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+  <header>
+    <nav class="navbar">
+      <img src="assets/logo.png" alt="Logo Marché Provence" class="logo">
+      <ul>
+        <li><a href="index.html" class="active">Accueil</a></li>
+        <li><a href="produits.html">Produits</a></li>
+        <li><a href="marches.html">Marchés</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
   <!-- HERO -->
-  <section id="top" class="hero-landing">
-    <div class="container hero-wrap">
-      <div class="hero-txt">
-        <h1>Découvrez nos parfums &amp; senteurs <br> uniques inspirés de la Provence</h1>
-        <a class="btn" href="#produits">VOIR NOS PRODUITS</a>
-      </div>
-      <!-- l’image est mise en fond via CSS (assets/hero.jpg) -->
-    </div>
-  </section>
-
-  <!-- PRODUITS (vignettes statiques style maquette) -->
-  <section id="produits" class="accueil-produits">
+  <section class="hero">
     <div class="container">
-      <h2 class="title-center">PRODUITS</h2>
-
-      <div class="vignettes">
-        <!-- 1 -->
-        <figure class="v">
-          <img src="assets/parfum1.jpg" alt="Cœur de Lavande">
-          <figcaption>
-            <div class="v-nom">Cœur de Lavande</div>
-            <div class="v-notes">Notes fruitées florales</div>
-          </figcaption>
-        </figure>
-        <!-- 2 -->
-        <figure class="v">
-          <img src="assets/parfum2.jpg" alt="Éclat d’Agrumes">
-          <figcaption>
-            <div class="v-nom">Éclat d’Agrumes</div>
-            <div class="v-notes">Notes fraîches</div>
-          </figcaption>
-        </figure>
-        <!-- 3 -->
-        <figure class="v">
-          <img src="assets/parfum3.jpg" alt="Soleil des Alpes">
-          <figcaption>
-            <div class="v-nom">Soleil des Alpes</div>
-            <div class="v-notes">Notes d’agrumes</div>
-          </figcaption>
-        </figure>
-        <!-- 4 (exemple avec la même img si tu n’en as pas d’autres) -->
-        <figure class="v">
-          <img src="assets/parfum4.jpg" alt="Tâtre Aromatique">
-          <figcaption>
-            <div class="v-nom">Tâtre Aromatique</div>
-            <div class="v-notes">Notes épicées & florales</div>
-          </figcaption>
-        </figure>
-        <!-- 2e ligne -->
-        <figure class="v">
-          <img src="assets/parfum2.jpg" alt="Terre Aromaac">
-          <figcaption>
-            <div class="v-nom">Terre Aromaac</div>
-            <div class="v-notes">Notes fraîchees</div>
-          </figcaption>
-        </figure>
-        <figure class="v">
-          <img src="assets/parfum3.jpg" alt="Brise de Rose">
-          <figcaption>
-            <div class="v-nom">Brise de Rose</div>
-            <div class="v-notes">Notes florales fines</div>
-          </figcaption>
-        </figure>
-        <figure class="v">
-          <img src="assets/parfum4.jpg" alt="Rêve Intense">
-          <figcaption>
-            <div class="v-nom">Rêve Intense</div>
-            <div class="v-notes">Nuances ambrées</div>
-          </figcaption>
-        </figure>
-        <figure class="v">
-          <img src="assets/parfum1.jpg" alt="Nocturne">
-          <figcaption>
-            <div class="v-nom">Nocturne</div>
-            <div class="v-notes">Boisé élégant</div>
-          </figcaption>
-        </figure>
-      </div>
-
-      <p class="disclaimer">Disponible uniquement sur notre stand au marché</p>
+      <h1>Découvrez nos parfums & senteurs uniques inspirés de la Provence</h1>
+      <a href="produits.html" class="btn">Voir nos produits</a>
     </div>
   </section>
 
-  <!-- MARCHÉS (catégorie demandée en haut) -->
-  <section id="marches" class="container" style="padding:28px 0">
-    <h2 class="title-center">PROCHAINS MARCHÉS</h2>
-    <table class="table">
-      <thead><tr><th>Date</th><th>Lieu</th><th>Horaires</th><th>Présence</th></tr></thead>
-      <tbody id="marches-body">
-        <tr><td>Sam 15/06</td><td>Aix — Place Richelme</td><td>9h–13h</td><td>✅</td></tr>
-        <tr><td>Dim 16/06</td><td>Marseille — Vieux-Port</td><td>10h–14h</td><td>✅</td></tr>
-      </tbody>
-    </table>
-    <!-- tu pourras plus tard relier ce tableau à ton admin/js pour éditer -->
-  </section>
-
-  <!-- À PROPOS & CONTACT -->
-  <section id="contact" class="container" style="padding:26px 0 40px">
-    <div class="about-contact">
-      <div>
-        <h2>À PROPOS</h2>
-        <p>Marché Provence, c’est une sélection de parfums de qualité à prix abordables, directement sur vos marchés locaux.</p>
-      </div>
-      <div>
-        <h2>CONTACT</h2>
-        <p>Instagram · WhatsApp · Facebook</p>
-      </div>
+  <!-- BEST SELLERS -->
+  <section class="best-section">
+    <div class="container">
+      <h2 class="title-center" style="margin-bottom:10px">BEST-SELLERS</h2>
+      <div id="best-strip" class="best-strip"></div>
     </div>
   </section>
 
-  <footer style="background:#5a3a22;color:#fff;padding:14px 0">
-    <div class="container">© 2025 Marché Provence — Tous droits réservés</div>
+  <!-- PRODUITS -->
+  <section class="products">
+    <div class="container">
+      <h2>PRODUITS</h2>
+      <div id="product-list" class="grid"></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© Marché Provence — Tous droits réservés</p>
   </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.renderProducts) renderProducts('product-list');
+      if (window.renderBestSellers) renderBestSellers('best-strip', 6);
+    });
+  </script>
 </body>
 </html>
