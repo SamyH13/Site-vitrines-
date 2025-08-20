@@ -1,56 +1,48 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Marché Provence — Accueil</title>
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="navbar">
-    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence"/></a>
-    <nav>
-      <a class="nav" href="index.html">Accueil</a>
-      <a class="nav" href="produits.html">Produits</a>
-      <a class="nav" href="marches.html">Marchés</a>
-      <a class="nav" href="photos.html">Photos</a>
-      <a class="nav" href="contact.html">Contact</a>
+  <!-- NAVBAR UNIFIÉE -->
+  <header>
+    <nav class="navbar container">
+      <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence"></a>
+      <ul class="nav-links">
+        <li><a href="produits.html">Produits</a></li>
+        <li><a href="marches.html">Prochains Marchés</a></li>
+        <li><a href="avis.html">Avis Clients</a></li>
+        <li><a href="Idées.html">Idées &amp; Sondages</a></li>
+      </ul>
     </nav>
   </header>
 
-  <!-- HERO = l'image que tu veux, plein écran -->
-  <section class="hero-visual">
-    <div class="hero-inner">
-      <h1>Découvrez nos parfums &amp; senteurs<br/>uniques inspirés de la Provence</h1>
-      <a class="btn" href="produits.html">Voir nos produits</a>
+  <!-- HÉRO SIMPLE -->
+  <section class="hero">
+    <div class="container wrap">
+      <div class="hero-text">
+        <h1>Découvrez nos parfums &amp; senteurs inspirés de la Provence</h1>
+        <p>Parfums, encens, huiles et soins. Retrouvez-nous sur les marchés.</p>
+        <div class="cta">
+          <a class="btn" href="produits.html">Voir les produits</a>
+          <a class="btn secondary" href="marches.html">Prochains marchés</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="assets/hero-flacon.jpg" alt="Flacon">
+      </div>
     </div>
   </section>
 
-  <!-- Best sellers -->
-  <section class="best">
-    <h2>Best-sellers</h2>
-    <div id="best-strip" class="strip"></div>
-  </section>
+  <main class="container" id="apropos" style="margin:40px auto">
+    <h2>À propos</h2>
+    <p>Marché Provence, c’est une sélection de parfums de qualité à prix abordables.</p>
+  </main>
 
-  <!-- Aperçu Produits -->
-  <section class="preview">
-    <h2>Produits</h2>
-    <div id="home-grid" class="grid"></div>
-    <div class="center"><a class="btn ghost" href="produits.html">Tous les produits</a></div>
-  </section>
-
-  <footer class="footer">© Marché Provence — Tous droits réservés</footer>
-
-  <!-- Bouton admin -->
-  <button id="admin-fab" class="fab" title="Admin">⚙️</button>
-
-  <script src="app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      renderBestSellers('best-strip', 6);
-      renderProducts('home-grid', 6); // aperçu 6 items
-      attachAdmin('Accueil');
-    });
-  </script>
+  <footer><div class="container">© <span id="year"></span> Marché Provence</div></footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 </body>
 </html>
