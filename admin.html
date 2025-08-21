@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — Marché Provence</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+<header>
+  <nav class="navbar container">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Marché Provence"></a>
+    <ul class="nav-links">
+      <li><a href="produits.html">Produits</a></li>
+      <li><a href="marches.html">Marchés</a></li>
+      <li><a href="avis.html">Avis Clients</a></li>
+      <li><a href="Idées.html">Idées</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="container">
+  <h1>Espace Administration</h1>
+
+  <!-- Connexion -->
+  <div id="loginBox">
+    <h2>Connexion Admin</h2>
+    <input id="email" type="email" placeholder="Email"><br><br>
+    <input id="password" type="password" placeholder="Mot de passe"><br><br>
+    <button id="btnLogin">Se connecter</button>
+  </div>
+
+  <!-- Tableau de bord -->
+  <div id="dashboard" style="display:none">
+    <h2>Bienvenue dans l’administration</h2>
+    <button id="btnLogout">Se déconnecter</button>
+
+    <section>
+      <h3>📦 Produits</h3>
+      <button id="btnAddProduct">Ajouter un produit</button>
+      <div id="productList"></div>
+    </section>
+
+    <section>
+      <h3>🛍️ Marchés</h3>
+      <button id="btnAddMarket">Ajouter un marché</button>
+      <div id="marketList"></div>
+    </section>
+
+    <section>
+      <h3>⭐ Avis Clients</h3>
+      <div id="reviewList"></div>
+    </section>
+  </div>
+</main>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
