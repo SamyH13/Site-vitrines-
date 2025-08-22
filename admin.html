@@ -1,249 +1,136 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Admin — Marché Provence</title>
-<style>
-  body{font-family:system-ui,Inter,Arial,sans-serif;margin:0;background:#faf7ef;color:#1e1a17}
-  header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #e6ddca;background:#fff;position:sticky;top:0;z-index:10}
-  .btn{padding:10px 14px;border:1px solid #d9cfbc;border-radius:10px;background:#fff;cursor:pointer}
-  .btn.primary{background:#1e1a17;color:#fff;border-color:#1e1a17}
-  .btn.danger{background:#ffefef;border-color:#ffd3d3}
-  .tabs{display:flex;gap:8px;padding:10px 16px;border-bottom:1px solid #e6ddca;background:#fff;position:sticky;top:58px;z-index:9}
-  .tab{padding:8px 12px;border-radius:999px;border:1px solid #e6ddca;background:#fff;cursor:pointer}
-  .tab.active{background:#1e1a17;color:#fff;border-color:#1e1a17}
-  .wrap{padding:16px;max-width:1100px;margin:auto}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .card{background:#fff;border:1px solid #e6ddca;border-radius:12px;padding:14px}
-  label{font-size:14px;color:#5b5248}
-  input,textarea,select{width:100%;padding:10px;border:1px solid #d9cfbc;border-radius:10px;margin-top:6px;font-family:inherit}
-  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-  .list{display:grid;gap:10px;max-height:64vh;overflow:auto}
-  .item{display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:center;border:1px solid #eee;border-radius:10px;padding:8px;background:#fff}
-  .item img{width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid #eee}
-  .pill{font-size:12px;padding:2px 8px;border:1px solid #e1d6c2;border-radius:999px;background:#faf6ee;display:inline-block;margin-left:6px}
-  .muted{color:#7a7168;font-size:13px}
-  .hide{display:none}
-  .login{max-width:420px;margin:50px auto}
-  @media (max-width:900px){.grid,.row,.row3{grid-template-columns:1fr}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Administration</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; }
+    body { margin: 0; background:#f7f7f9; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:14px 16px; background:#111; color:#fff; }
+    header h1 { font-size:18px; margin:0; }
+    header button { background:#fff; border:0; padding:8px 12px; border-radius:8px; cursor:pointer; }
+    .wrap { max-width:1000px; margin:20px auto; padding:0 14px; }
+    .card { background:#fff; border:1px solid #e9e9ee; border-radius:12px; padding:16px; margin-bottom:16px; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    label { font-size:13px; color:#333; margin-bottom:4px; display:block; }
+    input, textarea, select { width:100%; padding:10px; border:1px solid #d9d9e3; border-radius:8px; font-size:14px; }
+    textarea { min-height:80px; resize:vertical; }
+    .row { display:flex; gap:10px; }
+    .row > * { flex:1; }
+    .actions { display:flex; gap:8px; }
+    .btn { background:#111; color:#fff; border:0; padding:10px 14px; border-radius:10px; cursor:pointer; }
+    .btn.secondary { background:#e9e9ee; color:#111; }
+    .btn.danger { background:#e53935; }
+    table { width:100%; border-collapse:collapse; }
+    th, td { text-align:left; padding:10px; border-bottom:1px solid #eee; font-size:14px; vertical-align:top; }
+    .thumb { width:56px; height:56px; object-fit:cover; border-radius:8px; background:#f0f0f3; }
+    .badge { font-size:12px; padding:2px 8px; border-radius:999px; background:#f0f0f3; }
+    #loginCard { max-width:420px; margin:60px auto; }
+    #loginMsg, #formMsg { font-size:13px; color:#e53935; margin-top:8px; min-height:18px; }
+    .hide { display:none; }
+  </style>
 </head>
 <body>
-<header>
-  <b>Admin — Marché Provence</b>
-  <div>
-    <span id="who" class="muted"></span>
-    <button id="logout" class="btn hide">Se déconnecter</button>
-  </div>
-</header>
-
-<div class="tabs">
-  <button class="tab active" data-tab="tab-products">Produits</button>
-  <button class="tab" data-tab="tab-markets">Marchés</button>
-</div>
-
-<!-- LOGIN -->
-<section id="loginView" class="login">
-  <div class="card">
-    <h3>Connexion</h3>
-    <div class="muted">Accès réservé</div>
-    <div class="row" style="margin-top:10px">
-      <div>
-        <label>Email</label>
-        <input id="email" type="email" placeholder="toi@exemple.com">
-      </div>
-      <div>
-        <label>Mot de passe</label>
-        <input id="pass" type="password" placeholder="••••••••">
-      </div>
+  <header>
+    <h1>Admin — Produits</h1>
+    <div class="actions">
+      <span id="userEmail" class="badge"></span>
+      <button id="btnLogout" class="hide">Se déconnecter</button>
     </div>
-    <button id="login" class="btn" style="margin-top:12px">Se connecter</button>
-    <div id="loginMsg" class="muted" style="margin-top:8px"></div>
-  </div>
-</section>
+  </header>
 
-<!-- APP -->
-<section id="appView" class="wrap hide">
+  <div class="wrap">
 
-  <!-- ======= PRODUITS ======= -->
-  <div id="tab-products">
-    <div class="grid">
-      <!-- FORM PRODUIT -->
+    <!-- Connexion -->
+    <section id="loginCard" class="card">
+      <h2>Connexion administrateur</h2>
+      <div class="grid">
+        <div>
+          <label>Email</label>
+          <input id="loginEmail" type="email" placeholder="exemple@mail.com" />
+        </div>
+        <div>
+          <label>Mot de passe</label>
+          <input id="loginPassword" type="password" placeholder="••••••••" />
+        </div>
+      </div>
+      <div class="actions" style="margin-top:12px;">
+        <button id="btnLogin" class="btn">Se connecter</button>
+      </div>
+      <div id="loginMsg"></div>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dash" class="hide">
+      <!-- Formulaire produit -->
       <div class="card">
-        <h3 id="prodFormTitle">Nouveau produit</h3>
-        <div class="row">
+        <h2 id="formTitle">Nouveau produit</h2>
+        <input type="hidden" id="docId" />
+        <div class="grid">
           <div>
             <label>Nom</label>
-            <input id="p_name" type="text">
+            <input id="name" placeholder="Parfum Oud Royal" />
           </div>
           <div>
             <label>Catégorie</label>
-            <input id="p_cat" type="text">
+            <input id="category" placeholder="Parfums, Encens, Huiles…" />
           </div>
-        </div>
-        <div class="row">
-          <div>
-            <label>Prix (€)</label>
-            <input id="p_price" type="number" step="0.01" min="0" value="0">
+          <div class="row">
+            <div>
+              <label>Prix (€)</label>
+              <input id="price" type="number" step="0.01" placeholder="35" />
+            </div>
+            <div>
+              <label>Stock</label>
+              <input id="stock" type="number" step="1" placeholder="10" />
+            </div>
           </div>
-          <div>
-            <label>Stock</label>
-            <input id="p_stock" type="number" min="0" value="0">
-          </div>
-        </div>
-        <div>
-          <label>Description</label>
-          <textarea id="p_desc" rows="3"></textarea>
-        </div>
-        <div class="row">
-          <div>
-            <label>Image</label>
-            <input id="p_file" type="file" accept="image/*">
+          <div style="grid-column:1/-1;">
+            <label>Description</label>
+            <textarea id="desc" placeholder="Notes boisées, longue tenue…"></textarea>
           </div>
           <div>
-            <label>Ordre</label>
-            <input id="p_order" type="number" value="0">
+            <label>Image produit (JPG/PNG)</label>
+            <input id="imageFile" type="file" accept="image/*" />
+          </div>
+          <div>
+            <label>URL image (si déjà hébergée)</label>
+            <input id="imageUrl" placeholder="https://…" />
           </div>
         </div>
-        <div style="margin-top:12px">
-          <label><input id="p_active" type="checkbox" checked> Actif</label>
+
+        <div class="actions" style="margin-top:12px;">
+          <button id="btnSave" class="btn">Enregistrer</button>
+          <button id="btnReset" class="btn secondary" type="button">Réinitialiser</button>
         </div>
-        <div style="display:flex;gap:10px;margin-top:12px">
-          <button id="p_save" class="btn primary">Enregistrer</button>
-          <button id="p_reset" class="btn">Réinitialiser</button>
-          <button id="p_del" class="btn danger hide">Supprimer</button>
-        </div>
-        <div id="p_msg" class="muted" style="margin-top:8px"></div>
-        <input id="p_id" type="hidden">
+        <div id="formMsg"></div>
       </div>
-      <!-- LIST PRODUITS -->
+
+      <!-- Liste produits -->
       <div class="card">
-        <h3>Mes produits</h3>
-        <div class="list" id="p_list"></div>
+        <h2>Produits</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Nom</th>
+              <th>Catégorie</th>
+              <th>Prix</th>
+              <th>Stock</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productsTbody"></tbody>
+        </table>
       </div>
-    </div>
+    </section>
   </div>
 
-  <!-- ======= MARCHÉS ======= -->
-  <div id="tab-markets" class="hide">
-    <div class="grid">
-      <!-- FORM MARCHÉ -->
-      <div class="card">
-        <h3 id="mktFormTitle">Nouveau marché</h3>
-        <div class="row3">
-          <div>
-            <label>Date</label>
-            <input id="m_date" type="date">
-          </div>
-          <div>
-            <label>Statut</label>
-            <input id="m_status" type="text" placeholder="ex: Présent / Absent / Après-midi">
-          </div>
-          <div>
-            <label>Ordre</label>
-            <input id="m_order" type="number" value="0">
-          </div>
-        </div>
-        <div class="row3">
-          <div>
-            <label>Début</label>
-            <input id="m_start" type="time" value="08:00">
-          </div>
-          <div>
-            <label>Fin</label>
-            <input id="m_end" type="time" value="13:00">
-          </div>
-          <div>
-            <label>Lieu</label>
-            <input id="m_loc" type="text">
-          </div>
-        </div>
-        <div>
-          <label>Note</label>
-          <textarea id="m_note" rows="2"></textarea>
-        </div>
-        <div style="display:flex;gap:10px;margin-top:12px">
-          <button id="m_save" class="btn primary">Enregistrer</button>
-          <button id="m_reset" class="btn">Réinitialiser</button>
-          <button id="m_del" class="btn danger hide">Supprimer</button>
-        </div>
-        <div id="m_msg" class="muted" style="margin-top:8px"></div>
-        <input id="m_id" type="hidden">
-      </div>
-      <!-- LIST MARCHÉS -->
-      <div class="card">
-        <h3>Mes marchés</h3>
-        <div class="list" id="m_list"></div>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-  import { getFirestore, collection, addDoc, doc, setDoc, deleteDoc, onSnapshot, query, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDd-wmlJDIScJSWNyefvlLNyurT3zAc_hk",
-    authDomain: "site-vitrine-d2a44.firebaseapp.com",
-    projectId: "site-vitrine-d2a44",
-    storageBucket: "site-vitrine-d2a44.firebasestorage.app",
-    messagingSenderId: "155990687587",
-    appId: "1:155990687587:web:a6d449c3bf02e9eb17dd56"
-  };
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-  const storage = getStorage(app);
-
-  const $ = s=>document.querySelector(s);
-  const loginView=$('#loginView'), appView=$('#appView'), who=$('#who');
-
-  // AUTH
-  $('#login').onclick=async()=>{
-    try{
-      await signInWithEmailAndPassword(auth,$('#email').value,$('#pass').value);
-    }catch(e){$('#loginMsg').textContent=e.message;}
-  };
-  $('#logout').onclick=()=>signOut(auth);
-
-  onAuthStateChanged(auth,u=>{
-    if(u){who.textContent=u.email;loginView.classList.add('hide');appView.classList.remove('hide');listenProducts();listenMarkets();}
-    else{who.textContent='';loginView.classList.remove('hide');appView.classList.add('hide');}
-  });
-
-  // PRODUITS
-  const pCol=collection(db,"products");
-  function listenProducts(){ onSnapshot(query(pCol,orderBy('order','asc')),snap=>{
-    $('#p_list').innerHTML='';
-    snap.forEach(d=>{
-      const p=d.data();
-      const el=document.createElement('div');
-      el.className='item';
-      el.innerHTML=`<img src="${p.imageUrl||''}"><div><b>${p.name||''}</b> <span class="pill">${p.category||''}</span></div><div><button class="btn">Éditer</button></div>`;
-      $('#p_list').appendChild(el);
-    });
-  });}
-
-  // MARCHÉS
-  const mCol=collection(db,"markets");
-  function listenMarkets(){ onSnapshot(query(mCol,orderBy('date','asc')),snap=>{
-    $('#m_list').innerHTML='';
-    snap.forEach(d=>{
-      const m=d.data(),dt=m.date?.toDate?.();
-      const el=document.createElement('div');
-      el.className='item';
-      el.innerHTML=`<div style="width:64px;height:64px;display:grid;place-items:center">📅</div>
-        <div><b>${dt?dt.toLocaleDateString('fr-FR'):'—'}</b> <span class="pill">${m.status||''}</span>
-        <div class="muted">${m.startHH||''} – ${m.endHH||''} ${m.location?(' · '+m.location):''}</div></div>`;
-      $('#m_list').appendChild(el);
-    });
-  });}
-</script>
+  <!-- 1) Firebase config d'abord -->
+  <script type="module" src="./firebase-config.js"></script>
+  <!-- 2) Puis la logique admin -->
+  <script type="module" src="./admin.js"></script>
 </body>
 </html>
