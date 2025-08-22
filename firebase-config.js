@@ -1,21 +1,27 @@
-// Import des fonctions Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getStorage } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+<script type="module">
+// === firebase-config.js ===
+// Charge les SDK Firebase (version modules)
+import { initializeApp }    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { getAuth }          from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { getFirestore }     from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import { getStorage }       from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
 
-// Configuration Firebase de ton projet
+// ⚠️ Garde exactement TA config :
 const firebaseConfig = {
   apiKey: "AIzaSyDd-wmlJDIScJSWNyefvlLNyurT3zAc_hk",
   authDomain: "site-vitrine-d2a44.firebaseapp.com",
   projectId: "site-vitrine-d2a44",
-  storageBucket: "site-vitrine-d2a44.appspot.com",  // ✅ corrigé ici
+  storageBucket: "site-vitrine-d2a44.firebasestorage.app",
   messagingSenderId: "155990687587",
   appId: "1:155990687587:web:a6d449c3bf02e9eb17dd56"
 };
 
-// Initialisation de Firebase
+// Initialise l’app + expose les services pour le reste du site
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
+window.firebaseServices = {
+  app,
+  auth: getAuth(app),
+  db: getFirestore(app),
+  storage: getStorage(app),
+};
+</script>
