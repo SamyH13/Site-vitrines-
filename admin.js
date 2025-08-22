@@ -1,141 +1,205 @@
-// admin.js
-import { auth, db, storage } from "./firebase-config.js";
-import { 
-  signInWithEmailAndPassword, signOut, onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { 
-  collection, addDoc, getDocs, deleteDoc, doc 
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-import { 
-  ref, uploadBytes, getDownloadURL 
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+// === admin.js ===
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-// ------------------- AUTH -------------------
-const loginDiv = document.getElementById("loginDiv");
-const dashboard = document.getElementById("dashboard");
+import {
+  collection, addDoc, updateDoc, deleteDoc, doc,
+  onSnapshot, serverTimestamp, query, orderBy
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-document.getElementById("btnLogin").onclick = async () => {
-  const email = document.getElementById("email").value.trim();
-  const pass = document.getElementById("pass").value.trim();
+import {
+  ref as storageRef, uploadBytes, getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
+
+// Raccourcis services
+const { auth, db, storage } = window.firebaseServices;
+
+// --------- Sélecteurs
+const el = (id) => document.getElementById(id);
+const loginCard = el('loginCard');
+const dash = el('dash');
+const loginEmail = el('loginEmail');
+const loginPassword = el('loginPassword');
+const loginMsg = el('loginMsg');
+const btnLogin = el('btnLogin');
+const btnLogout = el('btnLogout');
+const userEmail = el('userEmail');
+
+const formTitle = el('formTitle');
+const docId = el('docId');
+const nameInput = el('name');
+const categoryInput = el('category');
+const priceInput = el('price');
+const stockInput = el('stock');
+const descInput = el('desc');
+const imageFile = el('imageFile');
+const imageUrl = el('imageUrl');
+const btnSave = el('btnSave');
+const btnReset = el('btnReset');
+const formMsg = el('formMsg');
+
+const productsTbody = el('productsTbody');
+
+// --------- Auth
+btnLogin?.addEventListener('click', async () => {
+  loginMsg.textContent = "Connexion…";
   try {
-    await signInWithEmailAndPassword(auth, email, pass);
+    await signInWithEmailAndPassword(auth, loginEmail.value.trim(), loginPassword.value);
+    loginMsg.textContent = "";
   } catch (e) {
-    alert(`Erreur de connexion : ${e.code}`);
-  }
-};
-
-document.getElementById("btnLogout").onclick = async () => {
-  await signOut(auth);
-};
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    loginDiv.style.display = "none";
-    dashboard.style.display = "block";
-    chargerProduits();
-    chargerMarches();
-    chargerAvis();
-  } else {
-    loginDiv.style.display = "block";
-    dashboard.style.display = "none";
+    loginMsg.textContent = "Erreur : " + (e?.message || e);
   }
 });
 
-// ------------------- PRODUITS -------------------
-const produitsDiv = document.getElementById("produits");
+btnLogout?.addEventListener('click', async () => {
+  try { await signOut(auth); } catch {}
+});
 
-async function chargerProduits() {
-  produitsDiv.innerHTML = "";
-  const snap = await getDocs(collection(db, "produits"));
-  snap.forEach((docSnap) => {
-    const p = docSnap.data();
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <b>${p.nom}</b> - ${p.prix} € - Stock: ${p.stock}<br>
-      ${p.description}<br>
-      <img src="${p.image || ""}" width="80"><br>
-      <button onclick="supprimerProduit('${docSnap.id}')">Supprimer</button>
-      <hr>`;
-    produitsDiv.appendChild(div);
-  });
-}
-
-document.getElementById("addProduitForm").onsubmit = async (e) => {
-  e.preventDefault();
-  const nom = document.getElementById("nomProduit").value;
-  const description = document.getElementById("descProduit").value;
-  const prix = document.getElementById("prixProduit").value;
-  const stock = document.getElementById("stockProduit").value;
-  const fichier = document.getElementById("imgProduit").files[0];
-  let imageURL = "";
-
-  if (fichier) {
-    const storageRef = ref(storage, "produits/" + fichier.name);
-    await uploadBytes(storageRef, fichier);
-    imageURL = await getDownloadURL(storageRef);
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    loginCard.classList.add('hide');
+    dash.classList.remove('hide');
+    btnLogout.classList.remove('hide');
+    userEmail.textContent = user.email || '';
+  } else {
+    loginCard.classList.remove('hide');
+    dash.classList.add('hide');
+    btnLogout.classList.add('hide');
+    userEmail.textContent = '';
   }
+});
 
-  await addDoc(collection(db, "produits"), { nom, description, prix, stock, image: imageURL });
-  alert("Produit ajouté !");
-  chargerProduits();
-};
-
-window.supprimerProduit = async (id) => {
-  await deleteDoc(doc(db, "produits", id));
-  chargerProduits();
-};
-
-// ------------------- MARCHÉS -------------------
-const marchesDiv = document.getElementById("marches");
-
-async function chargerMarches() {
-  marchesDiv.innerHTML = "";
-  const snap = await getDocs(collection(db, "marches"));
-  snap.forEach((docSnap) => {
-    const m = docSnap.data();
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <b>${m.ville}</b> - ${m.date} (${m.horaire})<br>
-      <button onclick="supprimerMarche('${docSnap.id}')">Supprimer</button>
-      <hr>`;
-    marchesDiv.appendChild(div);
-  });
+// --------- Helpers
+function resetForm() {
+  docId.value = "";
+  formTitle.textContent = "Nouveau produit";
+  nameInput.value = "";
+  categoryInput.value = "";
+  priceInput.value = "";
+  stockInput.value = "";
+  descInput.value = "";
+  imageFile.value = "";
+  imageUrl.value = "";
+  formMsg.textContent = "";
 }
 
-document.getElementById("addMarcheForm").onsubmit = async (e) => {
-  e.preventDefault();
-  const ville = document.getElementById("villeMarche").value;
-  const date = document.getElementById("dateMarche").value;
-  const horaire = document.getElementById("horaireMarche").value;
+btnReset?.addEventListener('click', resetForm);
 
-  await addDoc(collection(db, "marches"), { ville, date, horaire });
-  alert("Marché ajouté !");
-  chargerMarches();
-};
-
-window.supprimerMarche = async (id) => {
-  await deleteDoc(doc(db, "marches", id));
-  chargerMarches();
-};
-
-// ------------------- AVIS -------------------
-const avisDiv = document.getElementById("avis");
-
-async function chargerAvis() {
-  avisDiv.innerHTML = "";
-  const snap = await getDocs(collection(db, "avis"));
-  snap.forEach((docSnap) => {
-    const a = docSnap.data();
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <b>${a.client}</b> sur ${a.produit} : ${a.commentaire} (⭐ ${a.note})<br>
-      <button onclick="supprimerAvis('${docSnap.id}')">Supprimer</button>
-      <hr>`;
-    avisDiv.appendChild(div);
-  });
+// Upload image si fichier sélectionné → retourne l’URL
+async function maybeUploadImage() {
+  const file = imageFile.files?.[0];
+  if (!file) return null;
+  const filePath = `products/${Date.now()}_${file.name}`;
+  const ref = storageRef(storage, filePath);
+  await uploadBytes(ref, file);
+  return await getDownloadURL(ref);
 }
 
-window.supprimerAvis = async (id) => {
-  await deleteDoc(doc(db, "avis", id));
-  chargerAvis();
-};
+// --------- CRUD Produits
+btnSave?.addEventListener('click', async () => {
+  try {
+    formMsg.style.color = "#111";
+    formMsg.textContent = "Enregistrement…";
+
+    // récup champs
+    const data = {
+      name: nameInput.value.trim(),
+      category: categoryInput.value.trim(),
+      price: Number(priceInput.value || 0),
+      stock: Number(stockInput.value || 0),
+      desc: (descInput.value || "").trim(),
+      imageUrl: (imageUrl.value || "").trim(),
+      updatedAt: serverTimestamp(),
+    };
+
+    // upload fichier si présent
+    const uploaded = await maybeUploadImage();
+    if (uploaded) data.imageUrl = uploaded;
+
+    // validations simples
+    if (!data.name) throw new Error("Le nom est obligatoire.");
+    if (!data.category) throw new Error("La catégorie est obligatoire.");
+    if (Number.isNaN(data.price)) throw new Error("Prix invalide.");
+    if (Number.isNaN(data.stock)) throw new Error("Stock invalide.");
+
+    if (docId.value) {
+      // UPDATE
+      const ref = doc(db, "products", docId.value);
+      await updateDoc(ref, data);
+      formMsg.style.color = "#2e7d32";
+      formMsg.textContent = "Produit mis à jour.";
+    } else {
+      // CREATE
+      await addDoc(collection(db, "products"), {
+        ...data,
+        createdAt: serverTimestamp(),
+      });
+      formMsg.style.color = "#2e7d32";
+      formMsg.textContent = "Produit ajouté.";
+    }
+
+    resetForm();
+  } catch (e) {
+    formMsg.style.color = "#e53935";
+    formMsg.textContent = "Erreur : " + (e?.message || e);
+  }
+});
+
+// Liste en temps réel
+const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+onSnapshot(q, (snap) => {
+  productsTbody.innerHTML = "";
+  snap.forEach((d) => {
+    const p = d.data() || {};
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><img class="thumb" src="${p.imageUrl || ""}" alt="" /></td>
+      <td><strong>${p.name || ""}</strong></td>
+      <td><span class="badge">${p.category || ""}</span></td>
+      <td>${(p.price ?? 0).toString()} €</td>
+      <td>${(p.stock ?? 0).toString()}</td>
+      <td>${(p.desc || "").slice(0,140)}${(p.desc||"").length>140?"…":""}</td>
+      <td>
+        <div class="actions">
+          <button class="btn secondary" data-edit="${d.id}">Modifier</button>
+          <button class="btn danger" data-del="${d.id}">Supprimer</button>
+        </div>
+      </td>
+    `;
+    productsTbody.appendChild(tr);
+  });
+
+  // Boutons Modifier / Supprimer
+  productsTbody.querySelectorAll("[data-edit]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-edit");
+      const docData = snap.docs.find(x => x.id === id)?.data();
+      if (!docData) return;
+      docId.value = id;
+      formTitle.textContent = "Modifier le produit";
+      nameInput.value = docData.name || "";
+      categoryInput.value = docData.category || "";
+      priceInput.value = docData.price ?? "";
+      stockInput.value = docData.stock ?? "";
+      descInput.value = docData.desc || "";
+      imageUrl.value = docData.imageUrl || "";
+      imageFile.value = ""; // on ne pré-remplit pas un input file
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  productsTbody.querySelectorAll("[data-del]").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const id = btn.getAttribute("data-del");
+      if (!confirm("Supprimer ce produit ?")) return;
+      try {
+        await deleteDoc(doc(db, "products", id));
+      } catch (e) {
+        alert("Erreur : " + (e?.message || e));
+      }
+    });
+  });
+});
